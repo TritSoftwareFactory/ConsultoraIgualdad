@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import {
   motion,
   useScroll,
@@ -175,7 +175,6 @@ export function EcosystemPhases() {
   const containerRef = useRef<HTMLElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion() ?? false;
-  const [activePhaseIndex, setActivePhaseIndex] = useState(0);
 
   // Dynamic scroll progress along the vertical route timeline
   const { scrollYProgress } = useScroll({
@@ -187,47 +186,8 @@ export function EcosystemPhases() {
     clamp: true,
   });
 
-  // Track active phase dynamically based on scroll position in viewport
-  useEffect(() => {
-    const phaseIds = PHASES.map((p) => p.id);
-    const elements = phaseIds
-      .map((id) => document.getElementById(`phase-${id}`))
-      .filter(Boolean) as HTMLElement[];
-
-    if (elements.length === 0) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((e) => e.isIntersecting);
-        if (visible.length > 0) {
-          visible.sort(
-            (a, b) =>
-              Math.abs(a.boundingClientRect.top) -
-              Math.abs(b.boundingClientRect.top)
-          );
-          const id = visible[0].target.id.replace(/^phase-/, "");
-          const index = PHASES.findIndex((p) => p.id === id);
-          if (index !== -1) {
-            setActivePhaseIndex(index);
-          }
-        }
-      },
-      {
-        rootMargin: "-20% 0px -35% 0px",
-        threshold: [0.1, 0.25, 0.5],
-      }
-    );
-
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
   const scrollToPhase = (phaseId: string) => {
     const target = document.getElementById(`phase-${phaseId}`);
-    const index = PHASES.findIndex((p) => p.id === phaseId);
-    if (index !== -1) {
-      setActivePhaseIndex(index);
-    }
     if (target) {
       const isDesktop =
         typeof window !== "undefined" && window.innerWidth >= 768;
@@ -301,8 +261,6 @@ export function EcosystemPhases() {
             {PHASES.map((phase, idx) => {
               const Icon = phase.icon;
               const isAlternate = idx % 2 === 1;
-              const isActive = activePhaseIndex === idx;
-              const isPassed = activePhaseIndex > idx;
 
               return (
                 <motion.div
@@ -324,41 +282,17 @@ export function EcosystemPhases() {
                     className="absolute -left-10 sm:-left-12 md:-left-20 lg:-left-24 w-10 sm:w-12 md:w-20 lg:w-24 flex justify-center top-5 md:top-7 z-10"
                     aria-label={`Hito de la ruta: Fase ${phase.letter}`}
                   >
-                    <div className="relative">
-                      {/* Active Beacon Pulse Ring */}
-                      {isActive && !shouldReduceMotion && (
-                        <span
-                          aria-hidden="true"
-                          className="absolute -inset-1 rounded-full md:rounded-2xl bg-[#544f82]/25 animate-ping opacity-75 pointer-events-none"
-                        />
-                      )}
-
-                      <div
-                        className={`w-7 h-7 md:w-11 md:h-11 lg:w-12 lg:h-12 rounded-full md:rounded-2xl font-heading text-xs md:text-sm lg:text-base font-bold flex items-center justify-center transition-all duration-300 ${
-                          isActive
-                            ? "bg-[#544f82] text-white shadow-md ring-4 ring-[#544f82]/25 scale-110"
-                            : isPassed
-                            ? "bg-[#5f4a9a] text-white shadow-xs"
-                            : "bg-white text-[#676479] border-2 border-[#dedbea]"
-                        }`}
-                      >
-                        {isPassed ? (
-                          <Check size={14} weight="bold" />
-                        ) : (
-                          <span>{phase.letter}</span>
-                        )}
-                      </div>
+                    <div className="w-7 h-7 md:w-11 md:h-11 lg:w-12 lg:h-12 rounded-full md:rounded-2xl font-heading text-xs md:text-sm lg:text-base font-bold flex items-center justify-center bg-[#544f82] text-white shadow-sm ring-2 ring-[#544f82]/20">
+                      <span>{phase.letter}</span>
                     </div>
                   </motion.div>
 
                   {/* Phase Card with Scroll Reveal & Choreographed Explanation */}
                   <motion.div
                     variants={cardVariants}
-                    className={`rounded-2xl border p-5 sm:p-7 md:p-8 lg:p-9 transition-all duration-300 shadow-xs hover:shadow-md ${
-                      isActive
-                        ? "border-[#544f82]/60 shadow-md ring-1 ring-[#544f82]/20"
-                        : "border-[#dedbea] hover:border-[#544f82]/40"
-                    } ${isAlternate ? "bg-[#faf9fd]" : "bg-white"}`}
+                    className={`rounded-2xl border border-[#dedbea] hover:border-[#544f82]/40 p-5 sm:p-7 md:p-8 lg:p-9 transition-colors shadow-xs hover:shadow-md ${
+                      isAlternate ? "bg-[#faf9fd]" : "bg-white"
+                    }`}
                   >
                     {/* Header: Step Label, Subtitle, and Icon Badge */}
                     <motion.div
@@ -366,13 +300,7 @@ export function EcosystemPhases() {
                       className="flex items-start justify-between gap-4 mb-3 sm:mb-4"
                     >
                       <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                        <span
-                          className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider transition-colors ${
-                            isActive
-                              ? "bg-[#544f82] text-white"
-                              : "bg-[#544f82]/10 text-[#544f82]"
-                          }`}
-                        >
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider bg-[#544f82]/10 text-[#544f82]">
                           <span>{phase.stepLabel}</span>
                           <span className="opacity-40">·</span>
                           <span>{phase.shortTitle}</span>
@@ -477,13 +405,7 @@ export function EcosystemPhases() {
                 className="absolute -left-10 sm:-left-12 md:-left-20 lg:-left-24 w-10 sm:w-12 md:w-20 lg:w-24 flex justify-center top-6 md:top-8 z-10"
                 aria-label="Hito final de la ruta: Ciclo continuo de mejora"
               >
-                <div
-                  className={`w-7 h-7 md:w-11 md:h-11 lg:w-12 lg:h-12 rounded-full md:rounded-2xl flex items-center justify-center transition-all duration-300 ${
-                    activePhaseIndex === PHASES.length - 1
-                      ? "bg-[#5f4a9a] text-white shadow-md ring-4 ring-[#5f4a9a]/25 scale-105"
-                      : "bg-[#f1eff7] text-[#5f4a9a] border border-[#dedbea]"
-                  }`}
-                >
+                <div className="w-7 h-7 md:w-11 md:h-11 lg:w-12 lg:h-12 rounded-full md:rounded-2xl flex items-center justify-center bg-[#5f4a9a] text-white shadow-sm ring-2 ring-[#5f4a9a]/20">
                   <ArrowsClockwise
                     size={16}
                     weight="bold"
