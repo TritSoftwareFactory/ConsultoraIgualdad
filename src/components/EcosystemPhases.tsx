@@ -13,7 +13,6 @@ import {
   Scales,
   GraduationCap,
   Lifebuoy,
-  ArrowRight,
   ArrowDown,
   ArrowsClockwise,
   Check,
@@ -32,10 +31,6 @@ interface PhaseItem {
   deliverables: string[];
   icon: typeof FileMagnifyingGlass;
   badgeBg: string;
-  connectionSummary: string;
-  connectionDetail: string;
-  nextStepText: string;
-  nextLetter: string;
 }
 
 const PHASES: PhaseItem[] = [
@@ -56,11 +51,6 @@ const PHASES: PhaseItem[] = [
     ],
     icon: FileMagnifyingGlass,
     badgeBg: "bg-[#544f82] text-white",
-    connectionSummary: "Fundamenta la base técnica",
-    connectionDetail:
-      "Los hallazgos y la matriz de riesgos definen los estándares específicos para redactar o adecuar el protocolo institucional.",
-    nextStepText: "Habilita Fase B · Diseño de protocolos",
-    nextLetter: "B",
   },
   {
     id: "fase-b",
@@ -79,11 +69,6 @@ const PHASES: PhaseItem[] = [
     ],
     icon: Scales,
     badgeBg: "bg-[#5f4a9a] text-white",
-    connectionSummary: "Establece el marco normativo",
-    connectionDetail:
-      "El protocolo formal define los roles y procedimientos taxativos que se transferirán y entrenarán en las capacitaciones.",
-    nextStepText: "Habilita Fase C · Capacitación operativa",
-    nextLetter: "C",
   },
   {
     id: "fase-c",
@@ -102,11 +87,6 @@ const PHASES: PhaseItem[] = [
     ],
     icon: GraduationCap,
     badgeBg: "bg-[#544f82] text-white",
-    connectionSummary: "Activa la capacidad de respuesta",
-    connectionDetail:
-      "Los equipos formados aplican el protocolo en terreno y cuentan con respaldo permanente ante dudas o complejidades.",
-    nextStepText: "Habilita Fase D · Asesoramiento continuo",
-    nextLetter: "D",
   },
   {
     id: "fase-d",
@@ -125,11 +105,6 @@ const PHASES: PhaseItem[] = [
     ],
     icon: Lifebuoy,
     badgeBg: "bg-[#5f4a9a] text-white",
-    connectionSummary: "Garantiza vigencia y mejora",
-    connectionDetail:
-      "La supervisión de casos reales retroalimenta auditorías periódicas, cerrando el ciclo virtuoso de mejora continua.",
-    nextStepText: "Retroalimenta Fase A · Diagnóstico periódico",
-    nextLetter: "A",
   },
 ];
 
@@ -422,33 +397,14 @@ export function EcosystemPhases() {
 
                     {/* Comprehensive Explanation & Technical Deliverables Grid */}
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-                      {/* Left Column: Full Technical Description & Handover */}
+                      {/* Left Column: Full Technical Description */}
                       <motion.div
                         variants={childStaggerVariants}
-                        className="lg:col-span-7 flex flex-col justify-between"
+                        className="lg:col-span-7"
                       >
-                        <p className="text-[14px] sm:text-[14.5px] lg:text-[15px] text-[#464453] leading-relaxed mb-5">
+                        <p className="text-[14.5px] sm:text-[15px] lg:text-[15.5px] text-[#464453] leading-relaxed">
                           {phase.description}
                         </p>
-
-                        {/* Route Handover Box to Next Phase */}
-                        <div className="p-3.5 sm:p-4 rounded-xl bg-[#faf9fd] border border-[#dedbea]/90 flex items-start gap-3">
-                          <div className="w-6 h-6 rounded-lg bg-[#544f82] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
-                            {idx === PHASES.length - 1 ? (
-                              <ArrowsClockwise size={13} weight="bold" />
-                            ) : (
-                              <ArrowRight size={13} weight="bold" />
-                            )}
-                          </div>
-                          <div className="text-[12px] flex-1">
-                            <span className="font-semibold text-[#1a1926] block leading-snug">
-                              {phase.nextStepText}
-                            </span>
-                            <span className="text-[#676479] text-[11.5px] leading-relaxed block mt-0.5">
-                              {phase.connectionDetail}
-                            </span>
-                          </div>
-                        </div>
                       </motion.div>
 
                       {/* Right Column: Structured Deliverables Panel */}
