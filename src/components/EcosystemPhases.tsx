@@ -83,7 +83,7 @@ export function EcosystemPhases() {
             return (
               <div
                 key={phase.letter}
-                className={`rounded-2xl border p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 hover:shadow-md ${
+                className={`rounded-2xl border p-5 sm:p-7 md:p-8 flex flex-col justify-between transition-all duration-300 hover:shadow-md ${
                   isAlternate
                     ? "bg-[#faf9fd] border-[#dedbea]"
                     : "bg-white border-[#dedbea]"
@@ -91,10 +91,10 @@ export function EcosystemPhases() {
               >
                 <div>
                   {/* Phase Header */}
-                  <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center justify-between mb-4 sm:mb-5">
                     <div className="flex items-center gap-3">
                       <span
-                        className={`w-9 h-9 rounded-full flex items-center justify-center font-heading text-base font-bold shadow-sm ${phase.badgeBg}`}
+                        className={`w-9 h-9 rounded-xl flex items-center justify-center font-heading text-base font-bold shadow-xs ${phase.badgeBg}`}
                       >
                         {phase.letter}
                       </span>
@@ -109,25 +109,25 @@ export function EcosystemPhases() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="font-heading text-xl sm:text-2xl font-bold text-[#1a1926] mb-3">
+                  <h3 className="font-heading text-lg sm:text-2xl font-bold text-[#1a1926] mb-2 sm:mb-3">
                     {phase.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-[14.5px] text-[#464453] leading-relaxed mb-6">
+                  <p className="text-[14px] sm:text-[14.5px] text-[#464453] leading-relaxed mb-5 sm:mb-6">
                     {phase.description}
                   </p>
                 </div>
 
                 {/* Deliverables list */}
-                <div className="pt-5 border-t border-[#dedbea]/60">
-                  <div className="text-[11.5px] font-semibold text-[#544f82] mb-3">
+                <div className="pt-4 sm:pt-5 border-t border-[#dedbea]/60">
+                  <div className="text-[11.5px] font-semibold text-[#544f82] mb-2.5 sm:mb-3">
                     Entregables y resultados:
                   </div>
                   <ul className="space-y-2">
                     {phase.deliverables.map((item) => (
-                      <li key={item} className="flex items-center gap-2.5 text-[13px] text-[#3c3a4a]">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#5f4a9a] shrink-0" />
+                      <li key={item} className="flex items-start gap-2.5 text-[12.5px] sm:text-[13px] text-[#3c3a4a]">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#5f4a9a] shrink-0 mt-1.5" />
                         <span>{item}</span>
                       </li>
                     ))}

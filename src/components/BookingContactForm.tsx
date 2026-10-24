@@ -92,7 +92,7 @@ export function BookingContactForm() {
           {/* Left Column: Direct Institutional Channels & Location */}
           <div className="lg:col-span-5 space-y-6">
             
-            <div className="bg-[#faf9fd] rounded-2xl border border-[#dedbea] p-7 sm:p-8 space-y-6">
+            <div className="bg-[#faf9fd] rounded-2xl border border-[#dedbea] p-5 sm:p-7 md:p-8 space-y-6">
               <div>
                 <h3 className="font-heading text-xl font-bold text-[#1a1926] mb-2">
                   Atención directa y confidencial
@@ -103,14 +103,14 @@ export function BookingContactForm() {
               </div>
 
               {/* Direct links */}
-              <div className="space-y-4 pt-2">
+              <div className="space-y-3.5 pt-1">
                 
                 {/* WhatsApp */}
                 <a
                   href={`https://wa.me/5492920411152?text=${whatsappMessage}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-3.5 p-3.5 rounded-xl bg-white border border-[#dedbea] hover:border-[#b9b1d0] transition-colors group"
+                  className="flex items-start gap-3.5 p-3.5 rounded-xl bg-white border border-[#dedbea] hover:border-[#b9b1d0] active:scale-[0.99] transition-all group min-h-[52px]"
                 >
                   <div className="p-2.5 rounded-lg bg-[#faf9fd] text-[#544f82] group-hover:bg-[#544f82] group-hover:text-white transition-colors">
                     <WhatsappLogo size={20} weight="fill" />
@@ -128,7 +128,7 @@ export function BookingContactForm() {
                 {/* Email */}
                 <a
                   href="mailto:igualdadconsultora@gmail.com"
-                  className="flex items-start gap-3.5 p-3.5 rounded-xl bg-white border border-[#dedbea] hover:border-[#b9b1d0] transition-colors group"
+                  className="flex items-start gap-3.5 p-3.5 rounded-xl bg-white border border-[#dedbea] hover:border-[#b9b1d0] active:scale-[0.99] transition-all group min-h-[52px]"
                 >
                   <div className="p-2.5 rounded-lg bg-[#faf9fd] text-[#544f82] group-hover:bg-[#544f82] group-hover:text-white transition-colors">
                     <EnvelopeSimple size={20} weight="bold" />
@@ -148,7 +148,7 @@ export function BookingContactForm() {
                   href="https://instagram.com/igualdadconsultora"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-3.5 p-3.5 rounded-xl bg-white border border-[#dedbea] hover:border-[#b9b1d0] transition-colors group"
+                  className="flex items-start gap-3.5 p-3.5 rounded-xl bg-white border border-[#dedbea] hover:border-[#b9b1d0] active:scale-[0.99] transition-all group min-h-[52px]"
                 >
                   <div className="p-2.5 rounded-lg bg-[#faf9fd] text-[#544f82] group-hover:bg-[#544f82] group-hover:text-white transition-colors">
                     <InstagramLogo size={20} weight="bold" />
@@ -195,7 +195,7 @@ export function BookingContactForm() {
 
           {/* Right Column: Intake & Scheduling Form */}
           <div className="lg:col-span-7">
-            <div className="bg-white rounded-2xl border border-[#dedbea] p-7 sm:p-9 shadow-sm">
+            <div className="bg-white rounded-2xl border border-[#dedbea] p-5 sm:p-7 md:p-9 shadow-sm">
               
               {status === "success" ? (
                 <div className="text-center py-10 space-y-5 animate-in fade-in duration-300">
@@ -249,11 +249,12 @@ export function BookingContactForm() {
                         type="text"
                         id="fullName"
                         name="fullName"
+                        autoComplete="name"
                         required
                         value={formData.fullName}
                         onChange={handleChange}
                         placeholder="Ej. Dra. Mariana Gómez"
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-[#dedbea] bg-[#faf9fd] text-[#1a1926] text-[14px] placeholder-[#8b889e] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#5f4a9a]"
+                        className="w-full px-3.5 py-3 rounded-xl border border-[#dedbea] bg-[#faf9fd] text-[#1a1926] text-[16px] sm:text-[14px] placeholder-[#8b889e] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#5f4a9a] min-h-[46px]"
                       />
                     </div>
 
@@ -265,11 +266,12 @@ export function BookingContactForm() {
                         type="text"
                         id="organization"
                         name="organization"
+                        autoComplete="organization"
                         required
                         value={formData.organization}
                         onChange={handleChange}
                         placeholder="Ej. Empresa S.A. / Gremio / Municipio"
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-[#dedbea] bg-[#faf9fd] text-[#1a1926] text-[14px] placeholder-[#8b889e] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#5f4a9a]"
+                        className="w-full px-3.5 py-3 rounded-xl border border-[#dedbea] bg-[#faf9fd] text-[#1a1926] text-[16px] sm:text-[14px] placeholder-[#8b889e] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#5f4a9a] min-h-[46px]"
                       />
                     </div>
                   </div>
@@ -286,7 +288,7 @@ export function BookingContactForm() {
                         required
                         value={formData.sector}
                         onChange={handleChange}
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-[#dedbea] bg-[#faf9fd] text-[#1a1926] text-[14px] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#5f4a9a]"
+                        className="w-full px-3.5 py-3 rounded-xl border border-[#dedbea] bg-[#faf9fd] text-[#1a1926] text-[16px] sm:text-[14px] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#5f4a9a] min-h-[46px]"
                       >
                         <option value="empresa">Empresa / Empleador Privado</option>
                         <option value="sindicato">Sindicato / Organización Gremial</option>
@@ -306,7 +308,7 @@ export function BookingContactForm() {
                         required
                         value={formData.scope}
                         onChange={handleChange}
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-[#dedbea] bg-[#faf9fd] text-[#1a1926] text-[14px] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#5f4a9a]"
+                        className="w-full px-3.5 py-3 rounded-xl border border-[#dedbea] bg-[#faf9fd] text-[#1a1926] text-[16px] sm:text-[14px] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#5f4a9a] min-h-[46px]"
                       >
                         <option value="sistema_integral">Sistema Integral de Prevención (4 fases)</option>
                         <option value="diagnostico">Fase A: Diagnóstico y Hoja de Ruta</option>
@@ -328,11 +330,13 @@ export function BookingContactForm() {
                         type="email"
                         id="email"
                         name="email"
+                        autoComplete="email"
+                        inputMode="email"
                         required
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="contacto@organizacion.com"
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-[#dedbea] bg-[#faf9fd] text-[#1a1926] text-[14px] placeholder-[#8b889e] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#5f4a9a]"
+                        className="w-full px-3.5 py-3 rounded-xl border border-[#dedbea] bg-[#faf9fd] text-[#1a1926] text-[16px] sm:text-[14px] placeholder-[#8b889e] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#5f4a9a] min-h-[46px]"
                       />
                     </div>
 
@@ -344,11 +348,13 @@ export function BookingContactForm() {
                         type="tel"
                         id="phone"
                         name="phone"
+                        autoComplete="tel"
+                        inputMode="tel"
                         required
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="+54 9 11 ..."
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-[#dedbea] bg-[#faf9fd] text-[#1a1926] text-[14px] placeholder-[#8b889e] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#5f4a9a]"
+                        className="w-full px-3.5 py-3 rounded-xl border border-[#dedbea] bg-[#faf9fd] text-[#1a1926] text-[16px] sm:text-[14px] placeholder-[#8b889e] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#5f4a9a] min-h-[46px]"
                       />
                     </div>
                   </div>
@@ -365,7 +371,7 @@ export function BookingContactForm() {
                         name="preferredShift"
                         value={formData.preferredShift}
                         onChange={handleChange}
-                        className="w-full px-3 py-2 rounded-lg border border-[#dedbea] bg-white text-[#1a1926] text-[13.5px] focus:outline-none focus:ring-2 focus:ring-[#5f4a9a]"
+                        className="w-full px-3 py-2.5 rounded-lg border border-[#dedbea] bg-white text-[#1a1926] text-[16px] sm:text-[13.5px] focus:outline-none focus:ring-2 focus:ring-[#5f4a9a] min-h-[44px]"
                       >
                         <option value="manana">Turno Mañana (09:00 a 13:00 hs ART)</option>
                         <option value="tarde">Turno Tarde (14:00 a 18:00 hs ART)</option>
@@ -385,7 +391,7 @@ export function BookingContactForm() {
                         min="2026-10-24"
                         value={formData.preferredDate}
                         onChange={handleChange}
-                        className="w-full px-3 py-2 rounded-lg border border-[#dedbea] bg-white text-[#1a1926] text-[13.5px] focus:outline-none focus:ring-2 focus:ring-[#5f4a9a]"
+                        className="w-full px-3 py-2.5 rounded-lg border border-[#dedbea] bg-white text-[#1a1926] text-[16px] sm:text-[13.5px] focus:outline-none focus:ring-2 focus:ring-[#5f4a9a] min-h-[44px]"
                       />
                     </div>
                   </div>
@@ -402,7 +408,7 @@ export function BookingContactForm() {
                       value={formData.message}
                       onChange={handleChange}
                       placeholder="Indique si la organización ya cuenta con protocolos previos, dotación estimada de personal o urgencias a contemplar."
-                      className="w-full px-3.5 py-2.5 rounded-xl border border-[#dedbea] bg-[#faf9fd] text-[#1a1926] text-[14px] placeholder-[#8b889e] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#5f4a9a] resize-y"
+                      className="w-full px-3.5 py-3 rounded-xl border border-[#dedbea] bg-[#faf9fd] text-[#1a1926] text-[16px] sm:text-[14px] placeholder-[#8b889e] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#5f4a9a] resize-y"
                     />
                   </div>
 
@@ -411,7 +417,7 @@ export function BookingContactForm() {
                     <button
                       type="submit"
                       disabled={status === "submitting"}
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#544f82] hover:bg-[#433e68] disabled:bg-[#8b889e] text-white text-[14.5px] font-medium px-8 py-3.5 rounded-full transition-all shadow-sm hover:shadow active:scale-[0.98] cursor-pointer"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#544f82] hover:bg-[#433e68] disabled:bg-[#8b889e] text-white text-[15px] font-semibold px-8 py-4 rounded-xl transition-all shadow-sm hover:shadow active:scale-[0.98] cursor-pointer min-h-[48px]"
                     >
                       {status === "submitting" ? (
                         <>

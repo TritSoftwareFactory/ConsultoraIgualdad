@@ -26,14 +26,14 @@ export function PricingSection() {
         </div>
 
         {/* Investment Card */}
-        <div className="max-w-4xl mx-auto bg-white rounded-3xl border border-[#dedbea] p-8 sm:p-12 shadow-md relative overflow-hidden">
+        <div className="max-w-4xl mx-auto bg-white rounded-3xl border border-[#dedbea] p-5 sm:p-8 md:p-12 shadow-md relative overflow-hidden">
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
             {/* Left: Proposal & Price */}
             <div className="lg:col-span-5 space-y-5 text-center lg:text-left border-b lg:border-b-0 lg:border-r border-[#dedbea]/60 pb-8 lg:pb-0 lg:pr-8">
               
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f1eff7] text-[#544f82] text-[12px] font-semibold ">
+              <div className="flex items-center justify-center lg:justify-start gap-2 text-[12px] font-semibold tracking-[0.18em] uppercase text-[#544f82]">
                 <ShieldCheck size={16} weight="fill" />
                 <span>Propuesta Integral</span>
               </div>
@@ -57,7 +57,7 @@ export function PricingSection() {
               <div className="pt-4">
                 <Link
                   href="#contacto"
-                  className="w-full inline-flex items-center justify-center gap-2 bg-[#544f82] hover:bg-[#433e68] text-white text-[14.5px] font-medium px-6 py-3.5 rounded-full transition-all shadow-sm hover:shadow active:scale-[0.98]"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-[#544f82] hover:bg-[#433e68] text-white text-[14.5px] font-medium px-6 py-3.5 rounded-xl transition-all shadow-sm hover:shadow active:scale-[0.98]"
                 >
                   <span>Solicitar cotización formal</span>
                   <ArrowRight size={16} weight="bold" />
@@ -79,7 +79,7 @@ export function PricingSection() {
               <ul className="space-y-3.5">
                 {INCLUDED_ITEMS.map((item) => (
                   <li key={item} className="flex items-start gap-3">
-                    <div className="w-5 h-5 rounded-full bg-[#f1eff7] text-[#544f82] flex items-center justify-center shrink-0 mt-0.5">
+                    <div className="w-5 h-5 rounded-md bg-[#f1eff7] text-[#544f82] flex items-center justify-center shrink-0 mt-0.5">
                       <Check size={13} weight="bold" />
                     </div>
                     <span className="text-[14px] text-[#3c3a4a] leading-snug">

@@ -11,10 +11,13 @@ export function TrajectoryProfile() {
     <section id="trayectoria" className="py-16 md:py-24 bg-white border-b border-[#dedbea]/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Eyebrow and Headline (1 eyebrow per 3 sections rule: this is our 2nd eyebrow on the page!) */}
+        {/* Eyebrow and Headline (Sober editorial layout) */}
         <div className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#f1eff7] border border-[#dedbea] text-[11px] font-semibold tracking-[0.16em] uppercase text-[#544f82] mb-3">
-            <span>Dirección Técnica y Académica</span>
+          <div className="flex items-center gap-3 mb-4">
+            <span className="w-6 h-[1.5px] bg-[#544f82]/50" />
+            <span className="text-[12px] font-semibold tracking-[0.22em] uppercase text-[#544f82]">
+              Dirección Técnica y Académica
+            </span>
           </div>
           <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-[#1a1926] tracking-tight">
             Belén Scalesa: Más de 20 años de articulación institucional
@@ -32,7 +35,7 @@ export function TrajectoryProfile() {
             <div className="bg-[#faf9fd] rounded-2xl border border-[#dedbea] p-5 sm:p-6 shadow-sm">
               
               {/* Media Container */}
-              <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden bg-[#e4e1ed] border border-[#dedbea]">
+              <div className="relative aspect-[4/5] sm:aspect-[3/4] w-full rounded-xl overflow-hidden bg-[#e4e1ed] border border-[#dedbea]">
                 {viewMode === "photo" ? (
                   <Image
                     src="/images/belen-scalesa.webp"
@@ -52,13 +55,13 @@ export function TrajectoryProfile() {
                   </div>
                 )}
 
-                {/* View Mode Toggle Pill inside bottom corner */}
+                {/* View Mode Toggle inside bottom corner (Sober control) */}
                 <div className="absolute bottom-3 left-3 right-3 flex justify-center">
-                  <div className="inline-flex items-center p-1 rounded-full bg-white/92 backdrop-blur-md border border-[#dedbea] shadow-md gap-1">
+                  <div className="inline-flex items-center p-1 rounded-lg bg-white/95 backdrop-blur-md border border-[#dedbea] shadow-sm gap-1">
                     <button
                       type="button"
                       onClick={() => setViewMode("photo")}
-                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-semibold transition-all ${
+                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[12px] font-semibold transition-all ${
                         viewMode === "photo"
                           ? "bg-[#544f82] text-white shadow-xs"
                           : "text-[#676479] hover:text-[#1a1926]"
@@ -72,7 +75,7 @@ export function TrajectoryProfile() {
                     <button
                       type="button"
                       onClick={() => setViewMode("vector")}
-                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-semibold transition-all ${
+                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[12px] font-semibold transition-all ${
                         viewMode === "vector"
                           ? "bg-[#544f82] text-white shadow-xs"
                           : "text-[#676479] hover:text-[#1a1926]"

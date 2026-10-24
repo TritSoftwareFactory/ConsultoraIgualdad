@@ -88,9 +88,9 @@ export function AudiencesSection() {
           </p>
         </div>
 
-        {/* Tab Controls: Responsive Segmented Pill Switcher */}
-        <div className="flex justify-center mb-10 w-full max-w-xl mx-auto">
-          <div className="grid grid-cols-3 w-full p-1 rounded-full bg-white border border-[#dedbea] shadow-xs gap-1">
+        {/* Tab Controls: Responsive Segmented Switcher (Sober architectural styling) */}
+        <div className="flex justify-center mb-8 sm:mb-10 w-full max-w-xl mx-auto">
+          <div className="grid grid-cols-3 w-full p-1 rounded-xl bg-white border border-[#dedbea] shadow-xs gap-1">
             {AUDIENCES.map((audience) => {
               const TabIcon = audience.icon;
               const isSelected = audience.id === activeId;
@@ -100,15 +100,15 @@ export function AudiencesSection() {
                   key={audience.id}
                   type="button"
                   onClick={() => setActiveId(audience.id)}
-                  className={`inline-flex items-center justify-center gap-1.5 px-2 sm:px-4 py-2 sm:py-2.5 rounded-full text-[12px] sm:text-[13.5px] font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5f4a9a] text-center ${
+                  className={`inline-flex items-center justify-center gap-1.5 px-1.5 sm:px-4 py-2.5 sm:py-3 rounded-lg text-[12px] sm:text-[13.5px] font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5f4a9a] text-center min-h-[44px] cursor-pointer ${
                     isSelected
                       ? "bg-[#544f82] text-white shadow-sm"
                       : "text-[#676479] hover:text-[#1a1926] hover:bg-[#f6f5fa]"
                   }`}
                 >
                   <TabIcon size={16} weight={isSelected ? "bold" : "regular"} className="shrink-0" />
-                  <span className="hidden lg:inline">{audience.name}</span>
-                  <span className="lg:hidden">{audience.shortLabel}</span>
+                  <span className="hidden sm:inline">{audience.name}</span>
+                  <span className="sm:hidden">{audience.shortLabel}</span>
                 </button>
               );
             })}
@@ -116,7 +116,7 @@ export function AudiencesSection() {
         </div>
 
         {/* Active Content Panel */}
-        <div className="bg-white rounded-2xl border border-[#dedbea] p-8 sm:p-11 shadow-sm">
+        <div className="bg-white rounded-2xl border border-[#dedbea] p-5 sm:p-8 md:p-11 shadow-sm">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             {/* Left Column: Scope & Rationale */}

@@ -4,7 +4,7 @@ import { EnvelopeSimple, Phone, InstagramLogo, MapPin, ShieldCheck, ArrowUp } fr
 
 export function Footer() {
   return (
-    <footer className="bg-[#1a1926] text-[#dedbea] pt-14 pb-10 border-t border-[#373359]">
+    <footer className="bg-[#1a1926] text-[#dedbea] pt-14 pb-24 sm:pb-12 border-t border-[#373359]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-white/10">
@@ -113,24 +113,24 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar: Copyright & Compliance */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12px] text-[#dedbea]/60">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12px] text-[#dedbea]/60 text-center sm:text-left">
           <div>
             © 2026 Igualdad Consultora · Belén Scalesa. Todos los derechos reservados.
           </div>
 
-          <div className="flex items-center gap-6">
-            <span className="hover:text-[#dedbea] transition-colors">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
+            <span className="hover:text-[#dedbea] transition-colors py-1">
               Convenio 190 OIT
             </span>
-            <span className="hover:text-[#dedbea] transition-colors">
+            <span className="hover:text-[#dedbea] transition-colors py-1">
               Ley Micaela 27.499
             </span>
-            <span className="hover:text-[#dedbea] transition-colors">
+            <span className="hover:text-[#dedbea] transition-colors py-1">
               Ley 5182 Río Negro
             </span>
             <a
               href="#"
-              className="p-1.5 rounded-full bg-white/5 hover:bg-white/10 text-white transition-colors"
+              className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white transition-colors min-w-[36px] min-h-[36px] flex items-center justify-center"
               aria-label="Volver arriba"
             >
               <ArrowUp size={14} weight="bold" />

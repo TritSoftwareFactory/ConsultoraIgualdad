@@ -8,6 +8,7 @@ import { TrajectoryProfile } from "@/components/TrajectoryProfile";
 import { PricingSection } from "@/components/PricingSection";
 import { BookingContactForm } from "@/components/BookingContactForm";
 import { Footer } from "@/components/Footer";
+import { MobileQuickBar } from "@/components/MobileQuickBar";
 
 export default function Home() {
   const jsonLd = {
@@ -53,6 +54,7 @@ export default function Home() {
         <BookingContactForm />
       </main>
       <Footer />
+      <MobileQuickBar />
     </div>
   );
 }
