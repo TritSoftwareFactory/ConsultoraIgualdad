@@ -1,12 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
-import { GraduationCap, BookOpen, Briefcase, Camera, VectorThree } from "@phosphor-icons/react";
+import { GraduationCap, BookOpen, Briefcase } from "@phosphor-icons/react";
 
 export function TrajectoryProfile() {
-  const [viewMode, setViewMode] = useState<"photo" | "vector">("photo");
-
   return (
     <section id="trayectoria" className="py-16 md:py-24 bg-white border-b border-[#dedbea]/60">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -27,66 +24,23 @@ export function TrajectoryProfile() {
           </p>
         </div>
 
-        {/* Main Grid: Portrait with view toggle on left, Credentials on right */}
+        {/* Main Grid: Portrait on left, Credentials on right */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
           
-          {/* Left Column: Portrait Card with Photo / Vector switcher */}
+          {/* Left Column: Portrait Card */}
           <div className="lg:col-span-5">
             <div className="bg-[#faf9fd] rounded-2xl border border-[#dedbea] p-5 sm:p-6 shadow-sm">
               
               {/* Media Container */}
-              <div className="relative aspect-[4/5] sm:aspect-[3/4] w-full rounded-xl overflow-hidden bg-[#e4e1ed] border border-[#dedbea]">
-                {viewMode === "photo" ? (
-                  <Image
-                    src="/images/belen-scalesa.webp"
-                    alt="Retrato fotográfico de Belén Scalesa, Directora de Igualdad Consultora"
-                    fill
-                    className="object-cover object-top transition-opacity duration-300"
-                    priority
-                  />
-                ) : (
-                  <div className="relative w-full h-full p-2 flex items-center justify-center bg-[#f6f5fa]">
-                    <Image
-                      src="/images/belen-vector.svg"
-                      alt="Vectorización de identidad de Belén Scalesa"
-                      fill
-                      className="object-contain transition-opacity duration-300"
-                    />
-                  </div>
-                )}
-
-                {/* View Mode Toggle inside bottom corner (Sober control) */}
-                <div className="absolute bottom-3 left-3 right-3 flex justify-center">
-                  <div className="inline-flex items-center p-1 rounded-lg bg-white/95 backdrop-blur-md border border-[#dedbea] shadow-sm gap-1">
-                    <button
-                      type="button"
-                      onClick={() => setViewMode("photo")}
-                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[12px] font-semibold transition-all ${
-                        viewMode === "photo"
-                          ? "bg-[#544f82] text-white shadow-xs"
-                          : "text-[#676479] hover:text-[#1a1926]"
-                      }`}
-                      aria-label="Ver fotografía editorial"
-                    >
-                      <Camera size={14} weight={viewMode === "photo" ? "fill" : "regular"} />
-                      <span>Retrato</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => setViewMode("vector")}
-                      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-md text-[12px] font-semibold transition-all ${
-                        viewMode === "vector"
-                          ? "bg-[#544f82] text-white shadow-xs"
-                          : "text-[#676479] hover:text-[#1a1926]"
-                      }`}
-                      aria-label="Ver síntesis vectorial"
-                    >
-                      <VectorThree size={14} weight={viewMode === "vector" ? "bold" : "regular"} />
-                      <span>Vector</span>
-                    </button>
-                  </div>
-                </div>
+              <div className="relative aspect-[4/5] sm:aspect-[3/4] w-full rounded-xl overflow-hidden bg-[#e4e1ed] border border-[#dedbea] shadow-xs">
+                <Image
+                  src="/images/belen-scalesa.webp"
+                  alt="Retrato fotográfico de Belén Scalesa, Directora de Igualdad Consultora"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 40vw, 450px"
+                  className="object-cover object-top"
+                  priority
+                />
               </div>
 
               {/* Caption and Publication */}
