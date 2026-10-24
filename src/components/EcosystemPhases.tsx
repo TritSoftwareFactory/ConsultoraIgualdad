@@ -13,7 +13,7 @@ import {
   GraduationCap,
   Lifebuoy,
   ArrowRight,
-  ArrowBendDownLeft,
+  ArrowDown,
   ArrowsClockwise,
   Check,
   ShieldCheck,
@@ -134,13 +134,14 @@ const PHASES: PhaseItem[] = [
 
 export function EcosystemPhases() {
   const containerRef = useRef<HTMLElement>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion() ?? false;
   const [activePhaseIndex, setActivePhaseIndex] = useState(0);
 
-  // Scroll tracking across the whole ecosystem section for the fill lines
+  // Scroll tracking across the vertical route timeline for the dynamic progress fill line
   const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start 65%", "end 80%"],
+    target: timelineRef,
+    offset: ["start 75%", "end 80%"],
   });
 
   const timelineScale = useTransform(scrollYProgress, [0, 1], [0, 1], {
@@ -151,10 +152,7 @@ export function EcosystemPhases() {
   useEffect(() => {
     const phaseIds = PHASES.map((p) => p.id);
     const elements = phaseIds
-      .flatMap((id) => [
-        document.getElementById(`desktop-${id}`),
-        document.getElementById(`mobile-${id}`),
-      ])
+      .map((id) => document.getElementById(`phase-${id}`))
       .filter(Boolean) as HTMLElement[];
 
     if (elements.length === 0) return;
@@ -168,7 +166,7 @@ export function EcosystemPhases() {
               Math.abs(a.boundingClientRect.top) -
               Math.abs(b.boundingClientRect.top)
           );
-          const id = visible[0].target.id.replace(/^(desktop|mobile)-/, "");
+          const id = visible[0].target.id.replace(/^phase-/, "");
           const index = PHASES.findIndex((p) => p.id === id);
           if (index !== -1) {
             setActivePhaseIndex(index);
@@ -176,7 +174,7 @@ export function EcosystemPhases() {
         }
       },
       {
-        rootMargin: "-15% 0px -35% 0px",
+        rootMargin: "-18% 0px -38% 0px",
         threshold: [0.1, 0.25, 0.5],
       }
     );
@@ -186,13 +184,12 @@ export function EcosystemPhases() {
   }, []);
 
   const scrollToPhase = (phaseId: string) => {
-    const isDesktop = typeof window !== "undefined" && window.innerWidth >= 768;
-    const targetId = isDesktop ? `desktop-${phaseId}` : `mobile-${phaseId}`;
-    const target = document.getElementById(targetId);
+    const target = document.getElementById(`phase-${phaseId}`);
     if (target) {
-      const yOffset = isDesktop ? -170 : -90;
+      const isDesktop = typeof window !== "undefined" && window.innerWidth >= 768;
+      const yOffset = isDesktop ? -175 : -85;
       const y =
-        target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+        target.getBoundingClientRect().top + (window.scrollY || window.pageYOffset || 0) + yOffset;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
@@ -201,9 +198,9 @@ export function EcosystemPhases() {
     <section
       id="ecosistema"
       ref={containerRef}
-      className="py-16 md:py-24 bg-white border-b border-[#dedbea]/60 relative overflow-hidden"
+      className="py-16 md:py-24 bg-white border-b border-[#dedbea]/60 relative overflow-x-clip"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
           initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
@@ -231,7 +228,7 @@ export function EcosystemPhases() {
         </motion.div>
 
         {/* Desktop Pipeline Progress Bar (Sticky Navigation on Desktop) */}
-        <div className="hidden md:block sticky top-[72px] z-30 mb-10 py-1">
+        <div className="hidden md:block sticky top-[72px] z-30 mb-12 py-1">
           <div className="bg-[#faf9fd]/95 backdrop-blur-md border border-[#dedbea] rounded-2xl p-4 sm:p-5 shadow-sm">
             <div className="flex items-center justify-between mb-3.5 px-1">
               <div className="flex items-center gap-2 text-[11px] font-semibold tracking-wider uppercase text-[#676479]">
@@ -341,26 +338,30 @@ export function EcosystemPhases() {
         </div>
 
         {/* ============================================================== */}
-        {/* MOBILE VIEW (< md): Connected Vertical Timeline Rail         */}
+        {/* CONTINUOUS VERTICAL ROUTE (DESKTOP & MOBILE): "UNA ABAJO DE OTRA" */}
+        {/* As you scroll, each phase on the route appears with its explanation */}
         {/* ============================================================== */}
-        <div className="block md:hidden relative pl-9 sm:pl-11">
+        <div
+          ref={timelineRef}
+          className="relative pl-10 sm:pl-12 md:pl-20 lg:pl-24"
+        >
           {/* Continuous vertical timeline track line between first node and closure node */}
           <div
             aria-hidden="true"
-            className="absolute left-[17px] sm:left-[21px] -translate-x-1/2 top-7 bottom-12 w-[2px] bg-[#dedbea]"
+            className="absolute left-[20px] sm:left-[24px] md:left-[40px] lg:left-[48px] -translate-x-1/2 top-7 md:top-8 bottom-12 md:bottom-14 w-[2px] md:w-[3px] bg-[#dedbea]"
           />
 
-          {/* Dynamic scroll progress fill line on mobile */}
+          {/* Dynamic scroll progress fill line running down the route */}
           <motion.div
             aria-hidden="true"
             style={{
               scaleY: shouldReduceMotion ? 1 : timelineScale,
               transformOrigin: "top",
             }}
-            className="absolute left-[17px] sm:left-[21px] -translate-x-1/2 top-7 bottom-12 w-[2px] bg-gradient-to-b from-[#544f82] via-[#5f4a9a] to-[#7b61c4]"
+            className="absolute left-[20px] sm:left-[24px] md:left-[40px] lg:left-[48px] -translate-x-1/2 top-7 md:top-8 bottom-12 md:bottom-14 w-[2px] md:w-[3px] bg-gradient-to-b from-[#544f82] via-[#5f4a9a] to-[#7b61c4]"
           />
 
-          <div className="space-y-6">
+          <div className="space-y-8 md:space-y-12 lg:space-y-14">
             {PHASES.map((phase, idx) => {
               const Icon = phase.icon;
               const isAlternate = idx % 2 === 1;
@@ -370,16 +371,16 @@ export function EcosystemPhases() {
               return (
                 <div
                   key={phase.id}
-                  id={`mobile-${phase.id}`}
+                  id={`phase-${phase.id}`}
                   className="relative"
                 >
                   {/* Timeline Anchor Node aligned over vertical spine */}
                   <div
                     aria-hidden="true"
-                    className="absolute -left-9 sm:-left-11 w-9 sm:w-11 flex justify-center top-4 z-10"
+                    className="absolute -left-10 sm:-left-12 md:-left-20 lg:-left-24 w-10 sm:w-12 md:w-20 lg:w-24 flex justify-center top-5 md:top-7 z-10"
                   >
                     <div
-                      className={`w-7 h-7 rounded-full font-heading text-xs font-bold flex items-center justify-center transition-all duration-300 ${
+                      className={`w-7 h-7 md:w-11 md:h-11 lg:w-12 lg:h-12 rounded-full md:rounded-2xl font-heading text-xs md:text-sm lg:text-base font-bold flex items-center justify-center transition-all duration-300 ${
                         isActive
                           ? "bg-[#544f82] text-white shadow-md ring-4 ring-[#544f82]/20 scale-110"
                           : isPassed
@@ -388,299 +389,189 @@ export function EcosystemPhases() {
                       }`}
                     >
                       {isPassed ? (
-                        <Check size={12} weight="bold" />
+                        <Check size={14} weight="bold" />
                       ) : (
                         <span>{phase.letter}</span>
                       )}
                     </div>
                   </div>
 
-                  {/* Mobile Card with Scroll Reveal */}
+                  {/* Phase Card with Scroll Reveal Animation ("cada vez que aparece una tiene que aparecer su explicación") */}
                   <motion.div
-                    initial={shouldReduceMotion ? false : { opacity: 0, y: 22 }}
+                    initial={shouldReduceMotion ? false : { opacity: 0, y: 32 }}
                     whileInView={
                       shouldReduceMotion ? undefined : { opacity: 1, y: 0 }
                     }
                     viewport={{
                       once: true,
-                      amount: 0.15,
-                      margin: "0px 0px -40px 0px",
+                      amount: 0.18,
+                      margin: "0px 0px -50px 0px",
                     }}
                     transition={{
-                      duration: 0.45,
+                      duration: 0.55,
                       ease: [0.16, 1, 0.3, 1],
                     }}
-                    className={`rounded-2xl border p-5 sm:p-6 transition-all shadow-xs ${
+                    className={`rounded-2xl border p-5 sm:p-7 md:p-8 lg:p-9 transition-all duration-300 shadow-xs hover:shadow-md ${
                       isActive
-                        ? "border-[#544f82]/50 shadow-sm"
-                        : "border-[#dedbea]"
+                        ? "border-[#544f82]/60 shadow-md ring-1 ring-[#544f82]/20"
+                        : "border-[#dedbea] hover:border-[#544f82]/40"
                     } ${isAlternate ? "bg-[#faf9fd]" : "bg-white"}`}
                   >
-                    {/* Header */}
-                    <div className="flex items-start justify-between gap-3 mb-3">
-                      <div>
-                        <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-[#544f82]/10 text-[#544f82] text-[10.5px] font-bold uppercase tracking-wider mb-1.5">
+                    {/* Header: Step Label, Subtitle, and Icon */}
+                    <div className="flex items-start justify-between gap-4 mb-3 sm:mb-4">
+                      <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#544f82]/10 text-[#544f82] text-[11px] font-bold uppercase tracking-wider">
                           <span>{phase.stepLabel}</span>
-                        </div>
-                        <div className="text-[12px] font-medium text-[#676479] leading-tight">
+                          <span className="text-[#544f82]/30">·</span>
+                          <span>{phase.shortTitle}</span>
+                        </span>
+                        <span className="text-[12.5px] sm:text-[13px] font-medium text-[#676479]">
                           {phase.subtitle}
-                        </div>
+                        </span>
                       </div>
 
-                      <div className="p-2.5 rounded-xl bg-white border border-[#dedbea] text-[#544f82] shadow-xs shrink-0">
-                        <Icon size={20} weight="bold" />
+                      <div className="p-2.5 sm:p-3 rounded-xl bg-white border border-[#dedbea] text-[#544f82] shadow-xs shrink-0">
+                        <Icon size={22} weight="bold" />
                       </div>
                     </div>
 
-                    {/* Title */}
-                    <h3 className="font-heading text-lg font-bold text-[#1a1926] mb-2 leading-snug">
+                    {/* Phase Title */}
+                    <h3 className="font-heading text-xl sm:text-2xl lg:text-[26px] font-bold text-[#1a1926] mb-4 leading-snug">
                       {phase.title}
                     </h3>
 
-                    {/* Description */}
-                    <p className="text-[13.5px] text-[#464453] leading-relaxed mb-4">
-                      {phase.description}
-                    </p>
+                    {/* Comprehensive Explanation & Technical Deliverables Grid */}
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
+                      {/* Left Column: Full Technical Description & Handover */}
+                      <div className="lg:col-span-7 flex flex-col justify-between">
+                        <p className="text-[14px] sm:text-[14.5px] lg:text-[15px] text-[#464453] leading-relaxed mb-5">
+                          {phase.description}
+                        </p>
 
-                    {/* Deliverables */}
-                    <div className="pt-3.5 border-t border-[#dedbea]/70 mb-4">
-                      <div className="text-[11px] font-semibold uppercase tracking-wider text-[#544f82] mb-2">
-                        Entregables y resultados técnicos:
-                      </div>
-                      <ul className="space-y-2">
-                        {phase.deliverables.map((item) => (
-                          <li
-                            key={item}
-                            className="flex items-start gap-2 text-[12.5px] text-[#3c3a4a] leading-snug"
-                          >
-                            <span className="w-4 h-4 rounded-full bg-[#f1eff7] text-[#5f4a9a] flex items-center justify-center shrink-0 mt-0.5">
-                              <Check size={11} weight="bold" />
+                        {/* Route Handover Box to Next Phase */}
+                        <div className="p-3.5 sm:p-4 rounded-xl bg-[#faf9fd] border border-[#dedbea]/90 flex items-start gap-3">
+                          <div className="w-6 h-6 rounded-lg bg-[#544f82] text-white flex items-center justify-center shrink-0 mt-0.5 shadow-2xs">
+                            {idx === PHASES.length - 1 ? (
+                              <ArrowsClockwise size={13} weight="bold" />
+                            ) : (
+                              <ArrowRight size={13} weight="bold" />
+                            )}
+                          </div>
+                          <div className="text-[12px] flex-1">
+                            <span className="font-semibold text-[#1a1926] block leading-snug">
+                              {phase.nextStepText}
                             </span>
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Integrated Interconnection Card Footer */}
-                    <div className="mt-4 pt-3.5 border-t border-[#dedbea]/60 bg-[#faf9fd] -mx-5 -mb-5 sm:-mx-6 sm:-mb-6 p-3.5 sm:px-5 rounded-b-2xl flex items-start gap-2.5">
-                      <div className="w-5 h-5 rounded-md bg-[#544f82] text-white flex items-center justify-center shrink-0 mt-0.5">
-                        {idx === PHASES.length - 1 ? (
-                          <ArrowsClockwise size={12} weight="bold" />
-                        ) : (
-                          <ArrowRight size={12} weight="bold" />
-                        )}
+                            <span className="text-[#676479] text-[11.5px] leading-relaxed block mt-0.5">
+                              {phase.connectionDetail}
+                            </span>
+                          </div>
+                        </div>
                       </div>
-                      <div className="text-[12px] flex-1">
-                        <span className="font-semibold text-[#1a1926] block leading-snug">
-                          {phase.nextStepText}
-                        </span>
-                        <span className="text-[#676479] text-[11.5px] leading-relaxed block mt-0.5">
-                          {phase.connectionDetail}
-                        </span>
+
+                      {/* Right Column: Structured Deliverables Panel */}
+                      <div className="lg:col-span-5 rounded-xl bg-white lg:bg-[#faf9fd]/80 border border-[#dedbea] p-4 sm:p-5 shadow-2xs">
+                        <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-[#dedbea]/70">
+                          <div className="text-[11px] sm:text-[11.5px] font-bold uppercase tracking-wider text-[#544f82]">
+                            Entregables técnicos
+                          </div>
+                          <span className="text-[10.5px] font-semibold text-[#676479]">
+                            Convenio 190 OIT
+                          </span>
+                        </div>
+                        <ul className="space-y-2.5">
+                          {phase.deliverables.map((item) => (
+                            <li
+                              key={item}
+                              className="flex items-start gap-2.5 text-[12.5px] sm:text-[13px] text-[#3c3a4a] leading-snug"
+                            >
+                              <span className="w-4 h-4 rounded-full bg-[#f1eff7] text-[#5f4a9a] flex items-center justify-center shrink-0 mt-0.5">
+                                <Check size={11} weight="bold" />
+                              </span>
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     </div>
                   </motion.div>
+
+                  {/* Desktop Downward Route Flow Marker between Phases */}
+                  {idx < PHASES.length - 1 && (
+                    <div className="hidden md:flex items-center gap-3 pt-4 pb-1 pl-3 text-[11.5px] font-semibold tracking-wide text-[#676479]">
+                      <span className="w-5 h-[1.5px] bg-[#dedbea]" />
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[#dedbea] text-[11.5px] text-[#544f82] shadow-2xs">
+                        <ArrowDown size={12} weight="bold" className="text-[#5f4a9a]" />
+                        <span>Ruta hacia Paso {PHASES[idx + 1].stepNumber}: {PHASES[idx + 1].shortTitle}</span>
+                      </span>
+                      <span className="flex-1 h-[1.5px] bg-gradient-to-r from-[#dedbea] to-transparent" />
+                    </div>
+                  )}
                 </div>
               );
             })}
 
-            {/* Cycle Closure Terminal Node & Card on Mobile */}
-            <div className="relative pt-2">
+            {/* Terminal Cycle Node & Continuous Improvement Closure Card */}
+            <div className="relative pt-2 md:pt-4">
+              {/* Terminal Anchor Node on the vertical spine */}
               <div
                 aria-hidden="true"
-                className="absolute -left-9 sm:-left-11 w-9 sm:w-11 flex justify-center top-6 z-10"
+                className="absolute -left-10 sm:-left-12 md:-left-20 lg:-left-24 w-10 sm:w-12 md:w-20 lg:w-24 flex justify-center top-6 md:top-8 z-10"
               >
                 <div
-                  className={`w-7 h-7 rounded-full flex items-center justify-center transition-all duration-300 ${
+                  className={`w-7 h-7 md:w-11 md:h-11 lg:w-12 lg:h-12 rounded-full md:rounded-2xl flex items-center justify-center transition-all duration-300 ${
                     activePhaseIndex === PHASES.length - 1
-                      ? "bg-[#5f4a9a] text-white shadow-md ring-4 ring-[#5f4a9a]/25 scale-110"
+                      ? "bg-[#5f4a9a] text-white shadow-md ring-4 ring-[#5f4a9a]/25 scale-105"
                       : "bg-[#f1eff7] text-[#5f4a9a] border border-[#dedbea]"
                   }`}
                 >
-                  <ArrowsClockwise size={14} weight="bold" />
+                  <ArrowsClockwise size={16} weight="bold" className="md:scale-110" />
                 </div>
               </div>
 
               <motion.div
-                initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
-                whileInView={
-                  shouldReduceMotion ? undefined : { opacity: 1, y: 0 }
-                }
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.45 }}
-                className="bg-[#faf9fd] border border-[#dedbea] rounded-2xl p-4 sm:p-5 shadow-2xs"
-              >
-                <div className="flex items-center gap-2 mb-1.5">
-                  <span className="text-[11px] font-bold text-[#5f4a9a] uppercase tracking-wider">
-                    Ciclo continuo de mejora
-                  </span>
-                </div>
-                <div className="text-[13px] font-bold text-[#1a1926] mb-1">
-                  Retroalimentación permanente al diagnóstico inicial
-                </div>
-                <p className="text-[#464453] text-[12px] leading-relaxed">
-                  La supervisión de casos reales retroalimenta la Fase A,
-                  asegurando que los protocolos institucionales mantengan
-                  vigencia legal y técnica constante.
-                </p>
-              </motion.div>
-            </div>
-          </div>
-        </div>
-
-        {/* ============================================================== */}
-        {/* DESKTOP VIEW (>= md): Interconnected 2x2 Bento with Flow Links */}
-        {/* ============================================================== */}
-        <div className="hidden md:grid md:grid-cols-2 gap-7 lg:gap-8">
-          {PHASES.map((phase, idx) => {
-            const Icon = phase.icon;
-            const isAlternate = idx === 1 || idx === 2;
-            const isActive = activePhaseIndex === idx;
-
-            return (
-              <motion.div
-                key={phase.id}
-                id={`desktop-${phase.id}`}
                 initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
                 whileInView={
                   shouldReduceMotion ? undefined : { opacity: 1, y: 0 }
                 }
-                viewport={{
-                  once: true,
-                  amount: 0.15,
-                  margin: "0px 0px -40px 0px",
-                }}
-                transition={{
-                  duration: 0.5,
-                  delay: shouldReduceMotion ? 0 : (idx % 2) * 0.1,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className={`rounded-2xl border p-6 lg:p-8 flex flex-col justify-between transition-all duration-300 hover:shadow-md ${
-                  isActive
-                    ? "border-[#544f82]/60 shadow-md ring-1 ring-[#544f82]/20"
-                    : "border-[#dedbea] hover:border-[#544f82]/40"
-                } ${isAlternate ? "bg-[#faf9fd]" : "bg-white"}`}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.55 }}
+                className="rounded-2xl bg-[#faf9fd] border border-[#dedbea] p-5 sm:p-7 md:p-8 shadow-xs"
               >
-                <div>
-                  {/* Phase Header */}
-                  <div className="flex items-center justify-between mb-5">
-                    <div className="flex items-center gap-3">
-                      <span
-                        className={`w-9 h-9 rounded-xl flex items-center justify-center font-heading text-base font-bold shadow-xs transition-transform ${
-                          isActive ? "scale-105" : ""
-                        } ${phase.badgeBg}`}
-                      >
-                        {phase.letter}
-                      </span>
-                      <div>
-                        <div className="text-[11px] font-semibold text-[#544f82] uppercase tracking-wider">
-                          {phase.stepLabel}
-                        </div>
-                        <div className="text-[12px] font-medium text-[#676479]">
-                          {phase.subtitle}
-                        </div>
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-[#5f4a9a] text-white flex items-center justify-center shrink-0 shadow-xs mt-0.5">
+                      <ShieldCheck size={22} weight="bold" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2 mb-1">
+                        <span className="text-[11px] font-bold text-[#5f4a9a] uppercase tracking-wider">
+                          Ciclo continuo de mejora · Convenio 190 OIT
+                        </span>
                       </div>
-                    </div>
-
-                    <div className="p-2.5 rounded-xl bg-white border border-[#dedbea] text-[#544f82] shadow-xs">
-                      <Icon size={22} weight="bold" />
+                      <h4 className="font-heading text-base sm:text-lg font-bold text-[#1a1926] mb-1.5">
+                        Retroalimentación permanente al diagnóstico inicial
+                      </h4>
+                      <p className="text-[13px] sm:text-[13.5px] text-[#464453] leading-relaxed max-w-2xl">
+                        La supervisión de casos reales y la casuística incidente retroalimentan periódicamente la Fase A. Esto asegura que los protocolos institucionales no pierdan vigencia frente a reformas legislativas o reorganizaciones funcionales.
+                      </p>
                     </div>
                   </div>
 
-                  {/* Title */}
-                  <h3 className="font-heading text-xl lg:text-2xl font-bold text-[#1a1926] mb-3 leading-snug">
-                    {phase.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-[14px] lg:text-[14.5px] text-[#464453] leading-relaxed mb-6">
-                    {phase.description}
-                  </p>
-                </div>
-
-                <div>
-                  {/* Deliverables list */}
-                  <div className="pt-4 lg:pt-5 border-t border-[#dedbea]/70">
-                    <div className="text-[11.5px] font-semibold uppercase tracking-wider text-[#544f82] mb-3">
-                      Entregables y resultados técnicos:
-                    </div>
-                    <ul className="space-y-2.5">
-                      {phase.deliverables.map((item) => (
-                        <li
-                          key={item}
-                          className="flex items-start gap-2.5 text-[12.5px] lg:text-[13px] text-[#3c3a4a]"
-                        >
-                          <span className="w-4 h-4 rounded-full bg-[#f1eff7] text-[#5f4a9a] flex items-center justify-center shrink-0 mt-0.5">
-                            <Check size={11} weight="bold" />
-                          </span>
-                          <span className="leading-snug">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Dedicated Interconnection Bar at the bottom of the card with directional flow cues */}
-                  <div className="mt-6 pt-4 border-t border-[#dedbea]/50 bg-[#faf9fd] -mx-6 -mb-6 lg:-mx-8 lg:-mb-8 p-4 lg:px-6 rounded-b-2xl flex items-start gap-3">
-                    <div className="w-5 h-5 rounded-md bg-[#544f82] text-white flex items-center justify-center shrink-0 mt-0.5">
-                      {idx === 0 ? (
-                        <ArrowRight size={13} weight="bold" />
-                      ) : idx === 1 ? (
-                        <ArrowBendDownLeft size={13} weight="bold" />
-                      ) : idx === 2 ? (
-                        <ArrowRight size={13} weight="bold" />
-                      ) : (
-                        <ArrowsClockwise size={13} weight="bold" />
-                      )}
-                    </div>
-                    <div className="text-[12px] flex-1">
-                      <span className="font-semibold text-[#1a1926] block leading-snug">
-                        {phase.nextStepText}
-                      </span>
-                      <span className="text-[#676479] text-[11.5px] leading-relaxed block mt-0.5">
-                        {phase.connectionDetail}
-                      </span>
-                    </div>
+                  <div className="shrink-0 flex sm:self-start md:self-center">
+                    <button
+                      type="button"
+                      onClick={() => scrollToPhase("fase-a")}
+                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-[#dedbea] text-[12px] font-semibold text-[#544f82] hover:border-[#544f82] hover:bg-[#faf9fd] transition-all shadow-2xs cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5f4a9a]"
+                    >
+                      <ArrowsClockwise size={14} weight="bold" className="text-[#5f4a9a]" />
+                      <span>Volver al inicio de la ruta (Fase A)</span>
+                    </button>
                   </div>
                 </div>
               </motion.div>
-            );
-          })}
+            </div>
+          </div>
         </div>
-
-        {/* Desktop Bottom Continuous Ecosystem Banner */}
-        <motion.div
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
-          whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="hidden md:flex items-center justify-between gap-6 mt-10 p-5 rounded-2xl bg-[#faf9fd] border border-[#dedbea] shadow-2xs"
-        >
-          <div className="flex items-center gap-3.5">
-            <div className="w-9 h-9 rounded-xl bg-[#5f4a9a] text-white flex items-center justify-center shrink-0 shadow-xs">
-              <ShieldCheck size={20} weight="bold" />
-            </div>
-            <div>
-              <div className="text-[13px] font-bold text-[#1a1926]">
-                Ecosistema integral y sostenible bajo estándar Convenio 190 OIT
-              </div>
-              <div className="text-[12px] text-[#676479]">
-                Cada fase alimenta a la siguiente y la supervisión de casos
-                reales retroalimenta nuevos diagnósticos, cerrando un circuito de
-                prevención continua.
-              </div>
-            </div>
-          </div>
-
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white border border-[#dedbea] text-[11.5px] font-semibold text-[#544f82] shrink-0 shadow-2xs">
-            <ArrowsClockwise
-              size={14}
-              weight="bold"
-              className="text-[#5f4a9a]"
-            />
-            <span>Ciclo continuo de mejora</span>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
