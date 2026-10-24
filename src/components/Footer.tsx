@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { EnvelopeSimple, Phone, InstagramLogo, MapPin, ShieldCheck, ArrowUp } from "@phosphor-icons/react/dist/ssr";
+import { EnvelopeSimple, Phone, InstagramLogo, MapPin, ShieldCheck } from "@phosphor-icons/react/dist/ssr";
 
 export function Footer() {
   return (
@@ -99,34 +99,24 @@ export function Footer() {
             © 2026 Igualdad Consultora · Belén Scalesa. Todos los derechos reservados.
           </div>
 
-          <div className="flex items-center gap-4">
-            <a
-              href="https://trit.ar"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-[11px] text-[#dedbea]/45 hover:text-[#dedbea]/80 transition-colors group"
-              aria-label="Sitio web de Trit Software Factory"
-            >
-              <span>Desarrollado por</span>
-              <div className="relative w-3.5 h-3.5 shrink-0 opacity-75 group-hover:opacity-100 transition-opacity">
-                <Image
-                  src="/images/trit-logo.svg"
-                  alt="Trit Software Factory"
-                  fill
-                  className="object-contain"
-                />
-              </div>
-              <span className="font-medium tracking-wide">Trit Software Factory</span>
-            </a>
-
-            <a
-              href="#"
-              className="p-1.5 rounded text-[#dedbea]/40 hover:text-white transition-colors"
-              aria-label="Volver arriba"
-            >
-              <ArrowUp size={13} weight="bold" />
-            </a>
-          </div>
+          <a
+            href="https://trit.ar"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-[11px] text-[#dedbea]/45 hover:text-[#dedbea]/80 transition-colors group"
+            aria-label="Sitio web de Trit Software Factory"
+          >
+            <span>Desarrollado por</span>
+            <div className="relative w-3.5 h-3.5 shrink-0 opacity-75 group-hover:opacity-100 transition-opacity">
+              <Image
+                src="/images/trit-logo.svg"
+                alt="Trit Software Factory"
+                fill
+                className="object-contain"
+              />
+            </div>
+            <span className="font-medium tracking-wide">Trit Software Factory</span>
+          </a>
         </div>
 
       </div>
