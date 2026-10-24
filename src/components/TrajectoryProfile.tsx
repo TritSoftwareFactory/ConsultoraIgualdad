@@ -37,9 +37,9 @@ export function TrajectoryProfile() {
                   src="/images/belen-scalesa.webp"
                   alt="Retrato fotográfico de Belén Scalesa, Directora de Igualdad Consultora"
                   fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 40vw, 450px"
                   className="object-cover object-top"
                   priority
+                  unoptimized
                 />
               </div>
 
