@@ -1,26 +1,47 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-brand-primary: #5f4a9a;
+  --color-brand-deep: #544f82;
+  --color-brand-dark: #373359;
+  --color-brand-lavender: #b9b1d0;
+  --color-brand-soft: #f5f3f9;
+  --color-brand-border: #dedbea;
+  
+  --color-surface-base: #faf9fd;
+  --color-surface-soft: #f3f1f8;
+  --color-surface-card: #ffffff;
+  --color-surface-border: #e4e1ed;
+  --color-surface-border-subtle: #eeebf4;
+
+  --color-text-title: #1a1926;
+  --color-text-body: #3c3a4a;
+  --color-text-muted: #676479;
+  --color-text-soft: #8b889e;
+
+  --font-heading: var(--font-outfit), sans-serif;
+  --font-body: var(--font-plus-jakarta), sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #faf9fd;
+  color: #3c3a4a;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: #dedbea;
+  color: #544f82;
+}
+
+/* Accessible focus ring */
+:focus-visible {
+  outline: 2px solid #5f4a9a;
+  outline-offset: 2px;
 }
