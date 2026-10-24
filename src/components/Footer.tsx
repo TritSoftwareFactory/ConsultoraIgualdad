@@ -1,16 +1,16 @@
 import Image from "next/image";
-import Link from "next/link";
 import { EnvelopeSimple, Phone, InstagramLogo, MapPin, ShieldCheck, ArrowUp } from "@phosphor-icons/react/dist/ssr";
 
 export function Footer() {
   return (
-    <footer className="bg-[#1a1926] text-[#dedbea] pt-14 pb-24 sm:pb-12 border-t border-[#373359]">
+    <footer className="bg-[#1a1926] text-[#dedbea] pt-14 pb-12 border-t border-[#373359]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-white/10">
+        {/* Main Content: Brand & Direct Contact Channels */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 pb-12 border-b border-white/10 items-start">
           
           {/* Brand info */}
-          <div className="lg:col-span-5 space-y-4">
+          <div className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="relative w-9 h-9 shrink-0 bg-white/10 p-1 rounded-full">
                 <Image
@@ -30,107 +30,102 @@ export function Footer() {
               </div>
             </div>
 
-            <p className="text-[13.5px] text-[#dedbea]/80 max-w-sm leading-relaxed">
+            <p className="text-[13.5px] text-[#dedbea]/80 max-w-md leading-relaxed">
               Consultoría técnica e institucional para empresas, asociaciones gremiales y organismos públicos. Prevención y abordaje integral de la violencia y el acoso en el trabajo bajo los estándares del Convenio 190 OIT.
             </p>
 
-            <div className="pt-2 text-[12px] text-[#b9b1d0] flex items-center gap-2">
+            <div className="pt-1 text-[12px] text-[#b9b1d0] flex items-center gap-2">
               <ShieldCheck size={16} weight="bold" />
               <span>Dirección técnica: Belén Scalesa (FLACSO · UNCo · UNRN)</span>
             </div>
           </div>
 
-          {/* Quick Navigation */}
-          <div className="lg:col-span-3 space-y-3">
-            <div className="text-[12px] font-bold text-white">
-              Estructura Institucional
-            </div>
-            <ul className="space-y-2 text-[13.5px]">
-              <li>
-                <Link href="#metodologia" className="hover:text-white transition-colors">
-                  El desafío y metodología
-                </Link>
-              </li>
-              <li>
-                <Link href="#ecosistema" className="hover:text-white transition-colors">
-                  Sistema de 4 Fases
-                </Link>
-              </li>
-              <li>
-                <Link href="#audiencias" className="hover:text-white transition-colors">
-                  Empresas, Sindicatos y Estado
-                </Link>
-              </li>
-              <li>
-                <Link href="#trayectoria" className="hover:text-white transition-colors">
-                  Trayectoria curricular
-                </Link>
-              </li>
-              <li>
-                <Link href="#inversion" className="hover:text-white transition-colors">
-                  Inversión y condiciones
-                </Link>
-              </li>
-              <li>
-                <Link href="#contacto" className="hover:text-white transition-colors">
-                  Agendar reunión inicial
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Direct channels */}
-          <div className="lg:col-span-4 space-y-3">
-            <div className="text-[12px] font-bold text-white">
+          {/* Direct Contact Channels */}
+          <div className="space-y-4 md:pl-6 lg:pl-12">
+            <div className="text-[12px] font-bold uppercase tracking-wider text-white">
               Contacto y Canales Directos
             </div>
-            <ul className="space-y-2.5 text-[13px] text-[#dedbea]/80">
-              <li className="flex items-center gap-2.5">
-                <EnvelopeSimple size={16} weight="bold" className="text-[#b9b1d0] shrink-0" />
-                <a href="mailto:igualdadconsultora@gmail.com" className="hover:text-white transition-colors">
-                  igualdadconsultora@gmail.com
-                </a>
+            <ul className="space-y-3 text-[13.5px] text-[#dedbea]/85">
+              <li className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0 text-[#b9b1d0]">
+                  <EnvelopeSimple size={16} weight="bold" />
+                </div>
+                <div>
+                  <span className="text-[11px] text-[#dedbea]/60 block leading-tight">Correo electrónico</span>
+                  <a href="mailto:igualdadconsultora@gmail.com" className="text-white hover:text-[#b9b1d0] transition-colors font-medium">
+                    igualdadconsultora@gmail.com
+                  </a>
+                </div>
               </li>
-              <li className="flex items-center gap-2.5">
-                <Phone size={16} weight="bold" className="text-[#b9b1d0] shrink-0" />
-                <a href="https://wa.me/5492920411152" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-                  +54 9 2920 411152
-                </a>
+              <li className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0 text-[#b9b1d0]">
+                  <Phone size={16} weight="bold" />
+                </div>
+                <div>
+                  <span className="text-[11px] text-[#dedbea]/60 block leading-tight">Teléfono / WhatsApp</span>
+                  <a href="https://wa.me/5492920411152" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#b9b1d0] transition-colors font-medium">
+                    +54 9 2920 411152
+                  </a>
+                </div>
               </li>
-              <li className="flex items-center gap-2.5">
-                <InstagramLogo size={16} weight="bold" className="text-[#b9b1d0] shrink-0" />
-                <a href="https://instagram.com/igualdadconsultora" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-                  @igualdadconsultora
-                </a>
+              <li className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0 text-[#b9b1d0]">
+                  <InstagramLogo size={16} weight="bold" />
+                </div>
+                <div>
+                  <span className="text-[11px] text-[#dedbea]/60 block leading-tight">Canal institucional</span>
+                  <a href="https://instagram.com/igualdadconsultora" target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#b9b1d0] transition-colors font-medium">
+                    @igualdadconsultora
+                  </a>
+                </div>
               </li>
-              <li className="flex items-center gap-2.5">
-                <MapPin size={16} weight="bold" className="text-[#b9b1d0] shrink-0" />
-                <span>Viedma, Río Negro, República Argentina</span>
+              <li className="flex items-center gap-3">
+                <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0 text-[#b9b1d0]">
+                  <MapPin size={16} weight="bold" />
+                </div>
+                <div>
+                  <span className="text-[11px] text-[#dedbea]/60 block leading-tight">Sede institucional</span>
+                  <span className="text-white/90 font-medium">Viedma, Río Negro, República Argentina</span>
+                </div>
               </li>
             </ul>
           </div>
 
         </div>
 
-        {/* Bottom Bar: Copyright & Compliance */}
+        {/* Bottom Bar: Copyright & Desarrollado por Trit Software Factory */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12px] text-[#dedbea]/60 text-center sm:text-left">
           <div>
             © 2026 Igualdad Consultora · Belén Scalesa. Todos los derechos reservados.
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
-            <span className="hover:text-[#dedbea] transition-colors py-1">
-              Convenio 190 OIT
-            </span>
-            <span className="hover:text-[#dedbea] transition-colors py-1">
-              Ley Micaela 27.499
-            </span>
-            <span className="hover:text-[#dedbea] transition-colors py-1">
-              Ley 5182 Río Negro
-            </span>
+          <div className="flex items-center gap-3">
+            <a
+              href="https://trit.ar"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition-all text-[#dedbea]/80 hover:text-white group"
+              aria-label="Sitio web de Trit Software Factory"
+            >
+              <span className="text-[11.5px] font-medium text-[#dedbea]/70 group-hover:text-[#dedbea]">
+                Desarrollado por
+              </span>
+              <div className="relative w-5 h-5 shrink-0 bg-white/95 rounded p-0.5">
+                <Image
+                  src="/images/trit-logo.svg"
+                  alt="Logo Trit Software Factory"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <span className="text-[12px] font-semibold text-white tracking-wide">
+                Trit Software Factory
+              </span>
+            </a>
+
             <a
               href="#"
-              className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white transition-colors min-w-[36px] min-h-[36px] flex items-center justify-center"
+              className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white transition-colors min-w-[34px] min-h-[34px] flex items-center justify-center"
               aria-label="Volver arriba"
             >
               <ArrowUp size={14} weight="bold" />
