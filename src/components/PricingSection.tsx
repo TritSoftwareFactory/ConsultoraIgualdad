@@ -43,9 +43,11 @@ export function PricingSection() {
               </h3>
 
               <div className="pt-2">
-                <div className="flex items-baseline justify-center lg:justify-start gap-1">
-                  <span className="text-[14px] font-medium text-[#676479]">Desde</span>
-                  <span className="font-heading text-4xl sm:text-5xl font-extrabold text-[#544f82]">
+                <div className="flex items-baseline justify-center lg:justify-start gap-2 whitespace-nowrap">
+                  <span className="text-[13px] sm:text-[14px] font-semibold uppercase tracking-wider text-[#676479]">
+                    Desde
+                  </span>
+                  <span className="font-heading text-3xl sm:text-4xl lg:text-[40px] xl:text-[46px] font-extrabold text-[#544f82] tracking-tight whitespace-nowrap">
                     USD 2.800
                   </span>
                 </div>
