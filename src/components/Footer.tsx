@@ -94,41 +94,37 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar: Copyright & Desarrollado por Trit Software Factory */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12px] text-[#dedbea]/60 text-center sm:text-left">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11.5px] text-[#dedbea]/50 text-center sm:text-left">
           <div>
             © 2026 Igualdad Consultora · Belén Scalesa. Todos los derechos reservados.
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <a
               href="https://trit.ar"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition-all text-[#dedbea]/80 hover:text-white group"
+              className="inline-flex items-center gap-1.5 text-[11px] text-[#dedbea]/45 hover:text-[#dedbea]/80 transition-colors group"
               aria-label="Sitio web de Trit Software Factory"
             >
-              <span className="text-[11.5px] font-medium text-[#dedbea]/70 group-hover:text-[#dedbea]">
-                Desarrollado por
-              </span>
-              <div className="relative w-5 h-5 shrink-0 bg-white/95 rounded p-0.5">
+              <span>Desarrollado por</span>
+              <div className="relative w-3.5 h-3.5 shrink-0 opacity-75 group-hover:opacity-100 transition-opacity">
                 <Image
                   src="/images/trit-logo.svg"
-                  alt="Logo Trit Software Factory"
+                  alt="Trit Software Factory"
                   fill
                   className="object-contain"
                 />
               </div>
-              <span className="text-[12px] font-semibold text-white tracking-wide">
-                Trit Software Factory
-              </span>
+              <span className="font-medium tracking-wide">Trit Software Factory</span>
             </a>
 
             <a
               href="#"
-              className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white transition-colors min-w-[34px] min-h-[34px] flex items-center justify-center"
+              className="p-1.5 rounded text-[#dedbea]/40 hover:text-white transition-colors"
               aria-label="Volver arriba"
             >
-              <ArrowUp size={14} weight="bold" />
+              <ArrowUp size={13} weight="bold" />
             </a>
           </div>
         </div>
