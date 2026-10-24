@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { List, X, ArrowUpRight, WhatsappLogo } from "@phosphor-icons/react";
+import { List, X, ArrowUpRight } from "@phosphor-icons/react";
+import { motion, AnimatePresence } from "motion/react";
 
 const NAV_LINKS = [
   { href: "#metodologia", label: "Metodología" },
@@ -16,21 +17,21 @@ const NAV_LINKS = [
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Prevent background scrolling when mobile drawer is open
+  // Automatically close mobile menu when user starts scrolling the page
   useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [mobileMenuOpen]);
+    if (!mobileMenuOpen) return;
 
-  const whatsappMessage = encodeURIComponent(
-    "Hola Belén, me contacto desde el sitio web de Igualdad Consultora para coordinar una reunión inicial sobre prevención y abordaje de violencia laboral."
-  );
+    const initialScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      if (Math.abs(window.scrollY - initialScrollY) > 20) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [mobileMenuOpen]);
 
   const handleLogoClick = () => {
     setMobileMenuOpen(false);
@@ -108,47 +109,82 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Drawer (Active up to lg screens) */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden border-b border-[#dedbea] bg-[#faf9fd] px-5 pt-3 pb-6 space-y-5 animate-in fade-in slide-in-from-top-2 duration-200 max-h-[calc(100vh-68px)] overflow-y-auto">
-          <nav className="flex flex-col divide-y divide-[#dedbea]/50" aria-label="Navegación móvil">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-[16px] font-semibold text-[#1a1926] hover:text-[#544f82] py-3.5 flex items-center justify-between"
+      {/* Mobile Drawer with AnimatePresence, Backdrop and Spring Transition */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <>
+            {/* Backdrop: clicking outside or tapping closes the menu */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.18 }}
+              onClick={() => setMobileMenuOpen(false)}
+              className="fixed inset-0 top-[68px] sm:top-[72px] z-40 bg-[#1a1926]/20 backdrop-blur-xs lg:hidden"
+              aria-hidden="true"
+            />
+
+            {/* Drawer Container */}
+            <motion.div
+              initial={{ opacity: 0, y: -14 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -14 }}
+              transition={{ type: "spring", damping: 25, stiffness: 260 }}
+              className="relative z-50 lg:hidden border-b border-[#dedbea] bg-[#faf9fd] px-5 pt-3 pb-6 shadow-xl max-h-[calc(100vh-68px)] overflow-y-auto"
+            >
+              <motion.nav
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: { staggerChildren: 0.04, delayChildren: 0.03 },
+                  },
+                }}
+                className="flex flex-col divide-y divide-[#dedbea]/50"
+                aria-label="Navegación móvil"
               >
-                <span>{link.label}</span>
-                <span className="text-[#8b889e] text-xs">→</span>
-              </Link>
-            ))}
-          </nav>
+                {NAV_LINKS.map((link) => (
+                  <motion.div
+                    key={link.href}
+                    variants={{
+                      hidden: { opacity: 0, x: -8 },
+                      visible: { opacity: 1, x: 0 },
+                    }}
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="text-[16px] font-semibold text-[#1a1926] hover:text-[#544f82] active:text-[#544f82] py-3.5 flex items-center justify-between"
+                    >
+                      <span>{link.label}</span>
+                      <span className="text-[#8b889e] text-xs">→</span>
+                    </Link>
+                  </motion.div>
+                ))}
+              </motion.nav>
 
-          {/* Quick Mobile Action Stack */}
-          <div className="pt-2 space-y-2.5">
-            <Link
-              href="#contacto"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full flex items-center justify-center gap-2 bg-[#544f82] active:bg-[#433e68] text-white text-[15px] font-semibold py-3.5 px-4 rounded-xl shadow-xs text-center min-h-[48px]"
-            >
-              <span>Agendar reunión inicial</span>
-              <ArrowUpRight size={17} weight="bold" />
-            </Link>
-
-            <a
-              href={`https://wa.me/5492920411152?text=${whatsappMessage}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setMobileMenuOpen(false)}
-              className="w-full flex items-center justify-center gap-2 bg-white border border-[#dedbea] text-[#1a1926] text-[14px] font-semibold py-3 px-4 rounded-xl shadow-2xs text-center min-h-[46px]"
-            >
-              <WhatsappLogo size={18} weight="fill" className="text-[#25d366]" />
-              <span>WhatsApp: +54 9 2920 411152</span>
-            </a>
-          </div>
-        </div>
-      )}
+              {/* Action Button: Primary CTA only */}
+              <motion.div
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2, duration: 0.2 }}
+                className="pt-4"
+              >
+                <Link
+                  href="#contacto"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full flex items-center justify-center gap-2 bg-[#544f82] active:bg-[#433e68] text-white text-[15px] font-semibold py-3.5 px-4 rounded-xl shadow-xs text-center min-h-[48px]"
+                >
+                  <span>Agendar reunión inicial</span>
+                  <ArrowUpRight size={17} weight="bold" />
+                </Link>
+              </motion.div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
