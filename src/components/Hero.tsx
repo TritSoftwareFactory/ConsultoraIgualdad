@@ -1,31 +1,18 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import Link from "next/link";
-import { ArrowRight, Play, Pause } from "@phosphor-icons/react";
+import { ArrowRight } from "@phosphor-icons/react";
 
 export function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isPlaying, setIsPlaying] = useState(true);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (prefersReducedMotion && videoRef.current) {
       videoRef.current.pause();
-      setIsPlaying(false);
     }
   }, []);
-
-  const togglePlay = () => {
-    if (!videoRef.current) return;
-    if (isPlaying) {
-      videoRef.current.pause();
-      setIsPlaying(false);
-    } else {
-      videoRef.current.play().catch(() => {});
-      setIsPlaying(true);
-    }
-  };
 
   return (
     <section className="relative min-h-[72vh] sm:min-h-[78vh] md:min-h-[82vh] flex items-center justify-center bg-[#faf9fd] overflow-hidden border-b border-[#dedbea]/60">
@@ -93,28 +80,6 @@ export function Hero() {
           </Link>
         </div>
 
-      </div>
-
-      {/* Discrete Accessibility Video Toggle (Bottom Corner) */}
-      <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-20">
-        <button
-          type="button"
-          onClick={togglePlay}
-          className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-white/85 hover:bg-white border border-[#dedbea] text-[11px] font-medium text-[#544f82] transition-colors shadow-2xs backdrop-blur-sm cursor-pointer min-h-[32px]"
-          aria-label={isPlaying ? "Pausar video de fondo" : "Reproducir video de fondo"}
-        >
-          {isPlaying ? (
-            <>
-              <Pause size={12} weight="bold" />
-              <span className="hidden xs:inline sm:inline">Pausar video</span>
-            </>
-          ) : (
-            <>
-              <Play size={12} weight="bold" />
-              <span className="hidden xs:inline sm:inline">Reproducir video</span>
-            </>
-          )}
-        </button>
       </div>
 
     </section>
