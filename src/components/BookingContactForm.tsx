@@ -3,7 +3,6 @@
 import { useState } from "react";
 import {
   EnvelopeSimple,
-  Phone,
   InstagramLogo,
   MapPin,
   CalendarCheck,
@@ -383,6 +382,7 @@ export function BookingContactForm() {
                         type="date"
                         id="preferredDate"
                         name="preferredDate"
+                        min="2026-10-24"
                         value={formData.preferredDate}
                         onChange={handleChange}
                         className="w-full px-3 py-2 rounded-lg border border-[#dedbea] bg-white text-[#1a1926] text-[13.5px] focus:outline-none focus:ring-2 focus:ring-[#5f4a9a]"
@@ -421,7 +421,7 @@ export function BookingContactForm() {
                       ) : (
                         <>
                           <PaperPlaneTilt size={17} weight="bold" />
-                          <span>Solicitar reunión inicial</span>
+                          <span>Agendar reunión inicial</span>
                         </>
                       )}
                     </button>

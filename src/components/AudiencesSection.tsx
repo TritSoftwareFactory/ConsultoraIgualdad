@@ -7,6 +7,7 @@ import Link from "next/link";
 interface Audience {
   id: string;
   name: string;
+  shortLabel: string;
   tagline: string;
   icon: typeof Buildings;
   challenge: string;
@@ -18,6 +19,7 @@ const AUDIENCES: Audience[] = [
   {
     id: "empresas",
     name: "Empresas y Empleadores",
+    shortLabel: "Empresas",
     tagline: "Mitigación de riesgos legales y resguardo del clima organizacional",
     icon: Buildings,
     challenge:
@@ -34,6 +36,7 @@ const AUDIENCES: Audience[] = [
   {
     id: "sindicatos",
     name: "Sindicatos y Entidades Gremiales",
+    shortLabel: "Sindicatos",
     tagline: "Defensa gremial fundamentada y comisiones paritarias de igualdad",
     icon: UsersThree,
     challenge:
@@ -50,6 +53,7 @@ const AUDIENCES: Audience[] = [
   {
     id: "publico",
     name: "Organismos Públicos y Municipios",
+    shortLabel: "Sector Público",
     tagline: "Cumplimiento normativo, Ley Micaela y jerarquización institucional",
     icon: Bank,
     challenge:
@@ -84,9 +88,9 @@ export function AudiencesSection() {
           </p>
         </div>
 
-        {/* Tab Controls: Pill Switcher */}
-        <div className="flex justify-center mb-10">
-          <div className="inline-flex p-1.5 rounded-full bg-white border border-[#dedbea] shadow-xs gap-1.5">
+        {/* Tab Controls: Responsive Segmented Pill Switcher */}
+        <div className="flex justify-center mb-10 w-full max-w-xl mx-auto">
+          <div className="grid grid-cols-3 w-full p-1 rounded-full bg-white border border-[#dedbea] shadow-xs gap-1">
             {AUDIENCES.map((audience) => {
               const TabIcon = audience.icon;
               const isSelected = audience.id === activeId;
@@ -96,14 +100,15 @@ export function AudiencesSection() {
                   key={audience.id}
                   type="button"
                   onClick={() => setActiveId(audience.id)}
-                  className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13.5px] font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5f4a9a] ${
+                  className={`inline-flex items-center justify-center gap-1.5 px-2 sm:px-4 py-2 sm:py-2.5 rounded-full text-[12px] sm:text-[13.5px] font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5f4a9a] text-center ${
                     isSelected
                       ? "bg-[#544f82] text-white shadow-sm"
                       : "text-[#676479] hover:text-[#1a1926] hover:bg-[#f6f5fa]"
                   }`}
                 >
-                  <TabIcon size={17} weight={isSelected ? "bold" : "regular"} />
-                  <span>{audience.name}</span>
+                  <TabIcon size={16} weight={isSelected ? "bold" : "regular"} className="shrink-0" />
+                  <span className="hidden lg:inline">{audience.name}</span>
+                  <span className="lg:hidden">{audience.shortLabel}</span>
                 </button>
               );
             })}

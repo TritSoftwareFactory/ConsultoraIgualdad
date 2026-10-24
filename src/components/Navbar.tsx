@@ -63,7 +63,7 @@ export function Navbar() {
             href="#contacto"
             className="inline-flex items-center gap-2 bg-[#544f82] hover:bg-[#433e68] text-white text-[13.5px] font-medium px-5 py-2.5 rounded-full transition-all shadow-sm hover:shadow hover:-translate-y-[0.5px] active:translate-y-0"
           >
-            <span>Agendar reunión</span>
+            <span>Agendar reunión inicial</span>
             <ArrowUpRight size={15} weight="bold" />
           </Link>
         </div>

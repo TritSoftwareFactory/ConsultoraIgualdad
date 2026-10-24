@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { GraduationCap, BookOpen, Certificate, Briefcase, Camera, VectorThree } from "@phosphor-icons/react";
+import { GraduationCap, BookOpen, Briefcase, Camera, VectorThree } from "@phosphor-icons/react";
 
 export function TrajectoryProfile() {
   const [viewMode, setViewMode] = useState<"photo" | "vector">("photo");
@@ -14,7 +14,6 @@ export function TrajectoryProfile() {
         {/* Eyebrow and Headline (1 eyebrow per 3 sections rule: this is our 2nd eyebrow on the page!) */}
         <div className="max-w-3xl mb-12">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#f1eff7] border border-[#dedbea] text-[11px] font-semibold tracking-[0.16em] uppercase text-[#544f82] mb-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#5f4a9a]" />
             <span>Dirección Técnica y Académica</span>
           </div>
           <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-[#1a1926] tracking-tight">

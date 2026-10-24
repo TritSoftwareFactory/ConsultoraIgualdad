@@ -25,7 +25,6 @@ export function Hero() {
             
             {/* 1. Eyebrow (rationed 1 per 3 sections) */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#f1eff7] border border-[#dedbea] text-[11px] font-semibold tracking-[0.16em] uppercase text-[#544f82]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#5f4a9a]" />
               <span>Convenio 190 OIT · Prevención Laboral</span>
             </div>
 
