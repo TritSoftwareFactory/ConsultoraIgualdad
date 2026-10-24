@@ -32,23 +32,30 @@ export function Navbar() {
     "Hola Belén, me contacto desde el sitio web de Igualdad Consultora para coordinar una reunión inicial sobre prevención y abordaje de violencia laboral."
   );
 
+  const handleLogoClick = () => {
+    setMobileMenuOpen(false);
+    if (typeof window !== "undefined" && window.scrollY > 0) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full bg-[#faf9fd]/95 backdrop-blur-md border-b border-[#dedbea]/80 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[68px] sm:h-[72px] flex items-center justify-between">
         
-        {/* Brand Logo & Wordmark */}
+        {/* Brand Logo & Wordmark (Scrolls to top smoothly on click, without scale animation) */}
         <Link
           href="/"
-          className="flex items-center gap-2.5 sm:gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5f4a9a] rounded-lg p-1 -ml-1"
+          className="flex items-center gap-2.5 sm:gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5f4a9a] rounded-lg p-1 -ml-1 cursor-pointer"
           aria-label="Igualdad Consultora - Inicio"
-          onClick={() => setMobileMenuOpen(false)}
+          onClick={handleLogoClick}
         >
           <div className="relative w-8 h-8 sm:w-9 sm:h-9 shrink-0">
             <Image
               src="/images/logo-symbol.png"
               alt="Isotipo Igualdad Consultora"
               fill
-              className="object-contain transition-transform duration-300 group-hover:scale-105"
+              className="object-contain"
               priority
             />
           </div>

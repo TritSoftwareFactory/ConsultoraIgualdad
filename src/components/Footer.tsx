@@ -103,13 +103,13 @@ export function Footer() {
             href="https://trit.ar"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-[11px] text-[#dedbea]/45 hover:text-[#dedbea]/80 transition-colors group"
+            className="inline-flex items-center gap-1.5 text-[11px] text-[#dedbea]/45 hover:text-[#dedbea]/80 transition-colors duration-100 group"
             aria-label="Sitio web de Trit Software Factory"
           >
             <span>Desarrollado por</span>
-            <div className="relative w-3.5 h-3.5 shrink-0 opacity-75 group-hover:opacity-100 transition-opacity">
+            <div className="relative w-3.5 h-3.5 shrink-0 opacity-75 group-hover:opacity-100 transition-opacity duration-100">
               <Image
-                src="/images/trit-logo.svg"
+                src="/images/trit-icon.svg"
                 alt="Trit Software Factory"
                 fill
                 className="object-contain"
