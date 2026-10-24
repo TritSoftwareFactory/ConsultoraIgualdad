@@ -6,6 +6,7 @@ import {
   useScroll,
   useTransform,
   useReducedMotion,
+  type Variants,
 } from "motion/react";
 import {
   FileMagnifyingGlass,
@@ -132,13 +133,76 @@ const PHASES: PhaseItem[] = [
   },
 ];
 
+// Animation variants for orchestrated route progression & staggered explanation reveal
+const phaseContainerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.35,
+      staggerChildren: 0.1,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const nodeVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.72 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 280,
+      damping: 22,
+    },
+  },
+};
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 32 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.55,
+      ease: [0.16, 1, 0.3, 1],
+    },
+  },
+};
+
+const childStaggerVariants: Variants = {
+  hidden: { opacity: 0, y: 14 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.45,
+      ease: "easeOut",
+    },
+  },
+};
+
+const connectorVariants: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.45,
+      ease: "easeOut",
+      delay: 0.2,
+    },
+  },
+};
+
 export function EcosystemPhases() {
   const containerRef = useRef<HTMLElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion() ?? false;
   const [activePhaseIndex, setActivePhaseIndex] = useState(0);
 
-  // Scroll tracking across the vertical route timeline for the dynamic progress fill line
+  // Dynamic scroll progress along the vertical route timeline
   const { scrollYProgress } = useScroll({
     target: timelineRef,
     offset: ["start 75%", "end 80%"],
@@ -174,7 +238,7 @@ export function EcosystemPhases() {
         }
       },
       {
-        rootMargin: "-18% 0px -38% 0px",
+        rootMargin: "-20% 0px -35% 0px",
         threshold: [0.1, 0.25, 0.5],
       }
     );
@@ -185,11 +249,18 @@ export function EcosystemPhases() {
 
   const scrollToPhase = (phaseId: string) => {
     const target = document.getElementById(`phase-${phaseId}`);
+    const index = PHASES.findIndex((p) => p.id === phaseId);
+    if (index !== -1) {
+      setActivePhaseIndex(index);
+    }
     if (target) {
-      const isDesktop = typeof window !== "undefined" && window.innerWidth >= 768;
+      const isDesktop =
+        typeof window !== "undefined" && window.innerWidth >= 768;
       const yOffset = isDesktop ? -175 : -85;
       const y =
-        target.getBoundingClientRect().top + (window.scrollY || window.pageYOffset || 0) + yOffset;
+        target.getBoundingClientRect().top +
+        (window.scrollY || window.pageYOffset || 0) +
+        yOffset;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
@@ -339,7 +410,7 @@ export function EcosystemPhases() {
 
         {/* ============================================================== */}
         {/* CONTINUOUS VERTICAL ROUTE (DESKTOP & MOBILE): "UNA ABAJO DE OTRA" */}
-        {/* As you scroll, each phase on the route appears with its explanation */}
+        {/* As you scroll, the route progresses and reveals each phase with its explanation */}
         {/* ============================================================== */}
         <div
           ref={timelineRef}
@@ -369,60 +440,76 @@ export function EcosystemPhases() {
               const isPassed = activePhaseIndex > idx;
 
               return (
-                <div
+                <motion.div
                   key={phase.id}
                   id={`phase-${phase.id}`}
+                  initial={shouldReduceMotion ? false : "hidden"}
+                  whileInView={shouldReduceMotion ? undefined : "visible"}
+                  viewport={{
+                    once: true,
+                    amount: 0.2,
+                    margin: "0px 0px -40px 0px",
+                  }}
+                  variants={phaseContainerVariants}
                   className="relative"
                 >
-                  {/* Timeline Anchor Node aligned over vertical spine */}
-                  <div
-                    aria-hidden="true"
-                    className="absolute -left-10 sm:-left-12 md:-left-20 lg:-left-24 w-10 sm:w-12 md:w-20 lg:w-24 flex justify-center top-5 md:top-7 z-10"
-                  >
-                    <div
-                      className={`w-7 h-7 md:w-11 md:h-11 lg:w-12 lg:h-12 rounded-full md:rounded-2xl font-heading text-xs md:text-sm lg:text-base font-bold flex items-center justify-center transition-all duration-300 ${
-                        isActive
-                          ? "bg-[#544f82] text-white shadow-md ring-4 ring-[#544f82]/20 scale-110"
-                          : isPassed
-                          ? "bg-[#5f4a9a] text-white shadow-xs"
-                          : "bg-white text-[#676479] border-2 border-[#dedbea]"
-                      }`}
-                    >
-                      {isPassed ? (
-                        <Check size={14} weight="bold" />
-                      ) : (
-                        <span>{phase.letter}</span>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Phase Card with Scroll Reveal Animation ("cada vez que aparece una tiene que aparecer su explicación") */}
+                  {/* Coordinated Timeline Anchor Node aligned over vertical spine */}
                   <motion.div
-                    initial={shouldReduceMotion ? false : { opacity: 0, y: 32 }}
-                    whileInView={
-                      shouldReduceMotion ? undefined : { opacity: 1, y: 0 }
-                    }
-                    viewport={{
-                      once: true,
-                      amount: 0.18,
-                      margin: "0px 0px -50px 0px",
-                    }}
-                    transition={{
-                      duration: 0.55,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
+                    variants={nodeVariants}
+                    className="absolute -left-10 sm:-left-12 md:-left-20 lg:-left-24 w-10 sm:w-12 md:w-20 lg:w-24 flex justify-center top-5 md:top-7 z-10"
+                    aria-label={`Hito de la ruta: Fase ${phase.letter}`}
+                  >
+                    <div className="relative">
+                      {/* Active Beacon Pulse Ring */}
+                      {isActive && !shouldReduceMotion && (
+                        <span
+                          aria-hidden="true"
+                          className="absolute -inset-1 rounded-full md:rounded-2xl bg-[#544f82]/25 animate-ping opacity-75 pointer-events-none"
+                        />
+                      )}
+
+                      <div
+                        className={`w-7 h-7 md:w-11 md:h-11 lg:w-12 lg:h-12 rounded-full md:rounded-2xl font-heading text-xs md:text-sm lg:text-base font-bold flex items-center justify-center transition-all duration-300 ${
+                          isActive
+                            ? "bg-[#544f82] text-white shadow-md ring-4 ring-[#544f82]/25 scale-110"
+                            : isPassed
+                            ? "bg-[#5f4a9a] text-white shadow-xs"
+                            : "bg-white text-[#676479] border-2 border-[#dedbea]"
+                        }`}
+                      >
+                        {isPassed ? (
+                          <Check size={14} weight="bold" />
+                        ) : (
+                          <span>{phase.letter}</span>
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Phase Card with Scroll Reveal & Choreographed Explanation */}
+                  <motion.div
+                    variants={cardVariants}
                     className={`rounded-2xl border p-5 sm:p-7 md:p-8 lg:p-9 transition-all duration-300 shadow-xs hover:shadow-md ${
                       isActive
                         ? "border-[#544f82]/60 shadow-md ring-1 ring-[#544f82]/20"
                         : "border-[#dedbea] hover:border-[#544f82]/40"
                     } ${isAlternate ? "bg-[#faf9fd]" : "bg-white"}`}
                   >
-                    {/* Header: Step Label, Subtitle, and Icon */}
-                    <div className="flex items-start justify-between gap-4 mb-3 sm:mb-4">
+                    {/* Header: Step Label, Subtitle, and Icon Badge */}
+                    <motion.div
+                      variants={childStaggerVariants}
+                      className="flex items-start justify-between gap-4 mb-3 sm:mb-4"
+                    >
                       <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#544f82]/10 text-[#544f82] text-[11px] font-bold uppercase tracking-wider">
+                        <span
+                          className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider transition-colors ${
+                            isActive
+                              ? "bg-[#544f82] text-white"
+                              : "bg-[#544f82]/10 text-[#544f82]"
+                          }`}
+                        >
                           <span>{phase.stepLabel}</span>
-                          <span className="text-[#544f82]/30">·</span>
+                          <span className="opacity-40">·</span>
                           <span>{phase.shortTitle}</span>
                         </span>
                         <span className="text-[12.5px] sm:text-[13px] font-medium text-[#676479]">
@@ -433,17 +520,23 @@ export function EcosystemPhases() {
                       <div className="p-2.5 sm:p-3 rounded-xl bg-white border border-[#dedbea] text-[#544f82] shadow-xs shrink-0">
                         <Icon size={22} weight="bold" />
                       </div>
-                    </div>
+                    </motion.div>
 
                     {/* Phase Title */}
-                    <h3 className="font-heading text-xl sm:text-2xl lg:text-[26px] font-bold text-[#1a1926] mb-4 leading-snug">
+                    <motion.h3
+                      variants={childStaggerVariants}
+                      className="font-heading text-xl sm:text-2xl lg:text-[26px] font-bold text-[#1a1926] mb-4 leading-snug"
+                    >
                       {phase.title}
-                    </h3>
+                    </motion.h3>
 
                     {/* Comprehensive Explanation & Technical Deliverables Grid */}
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
                       {/* Left Column: Full Technical Description & Handover */}
-                      <div className="lg:col-span-7 flex flex-col justify-between">
+                      <motion.div
+                        variants={childStaggerVariants}
+                        className="lg:col-span-7 flex flex-col justify-between"
+                      >
                         <p className="text-[14px] sm:text-[14.5px] lg:text-[15px] text-[#464453] leading-relaxed mb-5">
                           {phase.description}
                         </p>
@@ -466,10 +559,13 @@ export function EcosystemPhases() {
                             </span>
                           </div>
                         </div>
-                      </div>
+                      </motion.div>
 
                       {/* Right Column: Structured Deliverables Panel */}
-                      <div className="lg:col-span-5 rounded-xl bg-white lg:bg-[#faf9fd]/80 border border-[#dedbea] p-4 sm:p-5 shadow-2xs">
+                      <motion.div
+                        variants={childStaggerVariants}
+                        className="lg:col-span-5 rounded-xl bg-white lg:bg-[#faf9fd]/80 border border-[#dedbea] p-4 sm:p-5 shadow-2xs"
+                      >
                         <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-[#dedbea]/70">
                           <div className="text-[11px] sm:text-[11.5px] font-bold uppercase tracking-wider text-[#544f82]">
                             Entregables técnicos
@@ -491,31 +587,49 @@ export function EcosystemPhases() {
                             </li>
                           ))}
                         </ul>
-                      </div>
+                      </motion.div>
                     </div>
                   </motion.div>
 
-                  {/* Desktop Downward Route Flow Marker between Phases */}
+                  {/* Downward Route Flow Connector between Phases on the Route */}
                   {idx < PHASES.length - 1 && (
-                    <div className="hidden md:flex items-center gap-3 pt-4 pb-1 pl-3 text-[11.5px] font-semibold tracking-wide text-[#676479]">
+                    <motion.div
+                      variants={connectorVariants}
+                      className="hidden md:flex items-center gap-3 pt-5 pb-1 pl-3 text-[11.5px] font-semibold tracking-wide text-[#676479]"
+                    >
                       <span className="w-5 h-[1.5px] bg-[#dedbea]" />
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-[#dedbea] text-[11.5px] text-[#544f82] shadow-2xs">
-                        <ArrowDown size={12} weight="bold" className="text-[#5f4a9a]" />
-                        <span>Ruta hacia Paso {PHASES[idx + 1].stepNumber}: {PHASES[idx + 1].shortTitle}</span>
-                      </span>
+                      <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#dedbea] text-[11.5px] font-semibold text-[#544f82] shadow-2xs">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#5f4a9a] animate-pulse" />
+                        <ArrowDown
+                          size={12}
+                          weight="bold"
+                          className="text-[#5f4a9a]"
+                        />
+                        <span>
+                          Ruta hacia Paso {PHASES[idx + 1].stepNumber}:{" "}
+                          {PHASES[idx + 1].shortTitle}
+                        </span>
+                      </div>
                       <span className="flex-1 h-[1.5px] bg-gradient-to-r from-[#dedbea] to-transparent" />
-                    </div>
+                    </motion.div>
                   )}
-                </div>
+                </motion.div>
               );
             })}
 
             {/* Terminal Cycle Node & Continuous Improvement Closure Card */}
-            <div className="relative pt-2 md:pt-4">
-              {/* Terminal Anchor Node on the vertical spine */}
-              <div
-                aria-hidden="true"
+            <motion.div
+              initial={shouldReduceMotion ? false : "hidden"}
+              whileInView={shouldReduceMotion ? undefined : "visible"}
+              viewport={{ once: true, amount: 0.2 }}
+              variants={phaseContainerVariants}
+              className="relative pt-2 md:pt-4"
+            >
+              {/* Coordinated Terminal Anchor Node on the vertical spine */}
+              <motion.div
+                variants={nodeVariants}
                 className="absolute -left-10 sm:-left-12 md:-left-20 lg:-left-24 w-10 sm:w-12 md:w-20 lg:w-24 flex justify-center top-6 md:top-8 z-10"
+                aria-label="Hito final de la ruta: Ciclo continuo de mejora"
               >
                 <div
                   className={`w-7 h-7 md:w-11 md:h-11 lg:w-12 lg:h-12 rounded-full md:rounded-2xl flex items-center justify-center transition-all duration-300 ${
@@ -524,17 +638,16 @@ export function EcosystemPhases() {
                       : "bg-[#f1eff7] text-[#5f4a9a] border border-[#dedbea]"
                   }`}
                 >
-                  <ArrowsClockwise size={16} weight="bold" className="md:scale-110" />
+                  <ArrowsClockwise
+                    size={16}
+                    weight="bold"
+                    className="md:scale-110"
+                  />
                 </div>
-              </div>
+              </motion.div>
 
               <motion.div
-                initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
-                whileInView={
-                  shouldReduceMotion ? undefined : { opacity: 1, y: 0 }
-                }
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.55 }}
+                variants={cardVariants}
                 className="rounded-2xl bg-[#faf9fd] border border-[#dedbea] p-5 sm:p-7 md:p-8 shadow-xs"
               >
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
@@ -552,7 +665,11 @@ export function EcosystemPhases() {
                         Retroalimentación permanente al diagnóstico inicial
                       </h4>
                       <p className="text-[13px] sm:text-[13.5px] text-[#464453] leading-relaxed max-w-2xl">
-                        La supervisión de casos reales y la casuística incidente retroalimentan periódicamente la Fase A. Esto asegura que los protocolos institucionales no pierdan vigencia frente a reformas legislativas o reorganizaciones funcionales.
+                        La supervisión de casos reales y la casuística incidente
+                        retroalimentan periódicamente la Fase A. Esto asegura
+                        que los protocolos institucionales no pierdan vigencia
+                        frente a reformas legislativas o reorganizaciones
+                        funcionales.
                       </p>
                     </div>
                   </div>
@@ -563,13 +680,17 @@ export function EcosystemPhases() {
                       onClick={() => scrollToPhase("fase-a")}
                       className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-[#dedbea] text-[12px] font-semibold text-[#544f82] hover:border-[#544f82] hover:bg-[#faf9fd] transition-all shadow-2xs cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5f4a9a]"
                     >
-                      <ArrowsClockwise size={14} weight="bold" className="text-[#5f4a9a]" />
+                      <ArrowsClockwise
+                        size={14}
+                        weight="bold"
+                        className="text-[#5f4a9a]"
+                      />
                       <span>Volver al inicio de la ruta (Fase A)</span>
                     </button>
                   </div>
                 </div>
               </motion.div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
