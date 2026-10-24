@@ -17,7 +17,7 @@ const NAV_LINKS = [
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Automatically close mobile menu when user starts scrolling the page
+  // Automatically close mobile menu when user starts scrolling the page or resizes to desktop
   useEffect(() => {
     if (!mobileMenuOpen) return;
 
@@ -29,8 +29,18 @@ export function Navbar() {
       }
     };
 
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setMobileMenuOpen(false);
+      }
+    };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
   }, [mobileMenuOpen]);
 
   const handleLogoClick = () => {
@@ -109,69 +119,45 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Drawer with AnimatePresence, Backdrop and Spring Transition */}
+      {/* Mobile Drawer with AnimatePresence, Backdrop and Clean Exit */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <>
-            {/* Backdrop: clicking outside or tapping closes the menu */}
+            {/* Backdrop: clicking outside closes the menu (No backdrop-blur to eliminate iOS Safari blur glitches) */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.18 }}
+              transition={{ duration: 0.15 }}
               onClick={() => setMobileMenuOpen(false)}
-              className="fixed inset-0 top-[68px] sm:top-[72px] z-40 bg-[#1a1926]/20 backdrop-blur-xs lg:hidden"
+              className="fixed inset-0 top-[68px] sm:top-[72px] z-40 bg-[#1a1926]/30 lg:hidden"
               aria-hidden="true"
             />
 
-            {/* Drawer Container */}
+            {/* Drawer Container (absolute top-full so header never stretches and leaves no white box on close) */}
             <motion.div
-              initial={{ opacity: 0, y: -14 }}
+              initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -14 }}
-              transition={{ type: "spring", damping: 25, stiffness: 260 }}
-              className="relative z-50 lg:hidden border-b border-[#dedbea] bg-[#faf9fd] px-5 pt-3 pb-6 shadow-xl max-h-[calc(100vh-68px)] overflow-y-auto"
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.18, ease: "easeOut" }}
+              className="absolute top-full inset-x-0 z-50 lg:hidden border-b border-[#dedbea] bg-[#faf9fd] px-5 pt-3 pb-6 shadow-xl max-h-[calc(100vh-72px)] overflow-y-auto"
             >
-              <motion.nav
-                initial="hidden"
-                animate="visible"
-                variants={{
-                  hidden: { opacity: 0 },
-                  visible: {
-                    opacity: 1,
-                    transition: { staggerChildren: 0.04, delayChildren: 0.03 },
-                  },
-                }}
-                className="flex flex-col divide-y divide-[#dedbea]/50"
-                aria-label="Navegación móvil"
-              >
+              <nav className="flex flex-col divide-y divide-[#dedbea]/50" aria-label="Navegación móvil">
                 {NAV_LINKS.map((link) => (
-                  <motion.div
+                  <Link
                     key={link.href}
-                    variants={{
-                      hidden: { opacity: 0, x: -8 },
-                      visible: { opacity: 1, x: 0 },
-                    }}
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="text-[16px] font-semibold text-[#1a1926] hover:text-[#544f82] active:text-[#544f82] py-3.5 flex items-center justify-between"
                   >
-                    <Link
-                      href={link.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="text-[16px] font-semibold text-[#1a1926] hover:text-[#544f82] active:text-[#544f82] py-3.5 flex items-center justify-between"
-                    >
-                      <span>{link.label}</span>
-                      <span className="text-[#8b889e] text-xs">→</span>
-                    </Link>
-                  </motion.div>
+                    <span>{link.label}</span>
+                    <span className="text-[#8b889e] text-xs">→</span>
+                  </Link>
                 ))}
-              </motion.nav>
+              </nav>
 
               {/* Action Button: Primary CTA only */}
-              <motion.div
-                initial={{ opacity: 0, y: 6 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.2 }}
-                className="pt-4"
-              >
+              <div className="pt-4">
                 <Link
                   href="#contacto"
                   onClick={() => setMobileMenuOpen(false)}
@@ -180,7 +166,7 @@ export function Navbar() {
                   <span>Agendar reunión inicial</span>
                   <ArrowUpRight size={17} weight="bold" />
                 </Link>
-              </motion.div>
+              </div>
             </motion.div>
           </>
         )}
