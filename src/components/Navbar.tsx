@@ -69,32 +69,33 @@ export function Navbar() {
           </div>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-7" aria-label="Navegación principal">
+        {/* Desktop Navigation (Visible on lg screens >= 1024px to prevent intermediate collision) */}
+        <nav className="hidden lg:flex items-center gap-4 xl:gap-6 2xl:gap-7" aria-label="Navegación principal">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-[14px] font-medium text-[#464453] hover:text-[#544f82] transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-[#5f4a9a] hover:after:w-full after:transition-all"
+              className="text-[13px] xl:text-[14px] font-medium text-[#464453] hover:text-[#544f82] transition-colors py-1 whitespace-nowrap relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-[#5f4a9a] hover:after:w-full after:transition-all"
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        {/* Action Button Desktop */}
-        <div className="hidden md:flex items-center gap-4">
+        {/* Action Button Desktop (Adaptive text and padding) */}
+        <div className="hidden lg:flex items-center gap-4 shrink-0">
           <Link
             href="#contacto"
-            className="inline-flex items-center gap-2 bg-[#544f82] hover:bg-[#433e68] text-white text-[13.5px] font-medium px-5 py-2.5 rounded-lg transition-all shadow-sm hover:shadow hover:-translate-y-[0.5px] active:translate-y-0"
+            className="inline-flex items-center gap-2 bg-[#544f82] hover:bg-[#433e68] text-white text-[13px] xl:text-[13.5px] font-medium px-4 xl:px-5 py-2.5 rounded-lg transition-all shadow-sm hover:shadow hover:-translate-y-[0.5px] active:translate-y-0 whitespace-nowrap shrink-0"
           >
-            <span>Agendar reunión inicial</span>
+            <span className="hidden xl:inline">Agendar reunión inicial</span>
+            <span className="xl:hidden">Agendar reunión</span>
             <ArrowUpRight size={15} weight="bold" />
           </Link>
         </div>
 
-        {/* Mobile Menu Trigger (Generous 44x44px touch target) */}
-        <div className="flex md:hidden">
+        {/* Mobile Menu Trigger (Active up to lg 1023px) */}
+        <div className="flex lg:hidden">
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -107,9 +108,9 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Drawer (Full height backdrop & accessible menu) */}
+      {/* Mobile Drawer (Active up to lg screens) */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-[#dedbea] bg-[#faf9fd] px-5 pt-3 pb-6 space-y-5 animate-in fade-in slide-in-from-top-2 duration-200 max-h-[calc(100vh-68px)] overflow-y-auto">
+        <div className="lg:hidden border-b border-[#dedbea] bg-[#faf9fd] px-5 pt-3 pb-6 space-y-5 animate-in fade-in slide-in-from-top-2 duration-200 max-h-[calc(100vh-68px)] overflow-y-auto">
           <nav className="flex flex-col divide-y divide-[#dedbea]/50" aria-label="Navegación móvil">
             {NAV_LINKS.map((link) => (
               <Link
