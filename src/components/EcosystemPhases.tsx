@@ -202,10 +202,11 @@ export function EcosystemPhases() {
 
   return (
     <section
-      id="ecosistema"
+      id="sistema"
       ref={containerRef}
-      className="py-16 md:py-24 bg-white border-b border-[#dedbea]/60 relative overflow-x-clip"
+      className="py-16 md:py-24 bg-white border-b border-[#dedbea]/60 relative overflow-x-clip scroll-mt-20"
     >
+      <span id="ecosistema" className="sr-only pointer-events-none" />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div

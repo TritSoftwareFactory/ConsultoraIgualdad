@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Buildings, UsersThree, Bank, ArrowRight, ShieldCheck } from "@phosphor-icons/react";
+import { Buildings, UsersThree, Bank, ArrowRight, ShieldCheck, GlobeSimple } from "@phosphor-icons/react";
 import Link from "next/link";
 
 interface Audience {
@@ -23,7 +23,7 @@ const AUDIENCES: Audience[] = [
     tagline: "Mitigación de riesgos legales y resguardo del clima organizacional",
     icon: Buildings,
     challenge:
-      "Las contingencias laborales por acoso o discriminación acarrean altos costos en indemnizaciones, deterioro del clima de trabajo, desmotivación de equipos y daños severos a la reputación corporativa.",
+      "Las contingencias laborales por acoso o discriminación acarrean altos costos en indemnizaciones, deterioro del clima de trabajo, desmotivación de equipos, ausentismo y daños severos a la reputación corporativa.",
     solution:
       "Estructuramos canales formales de denuncia y protocolos blindados conforme al Convenio 190 de la OIT. Capacitamos a la línea gerencial y a Recursos Humanos para actuar con celeridad y seguridad técnica.",
     highlights: [
@@ -75,17 +75,22 @@ export function AudiencesSection() {
   const Icon = activeAudience.icon;
 
   return (
-    <section id="audiencias" className="py-16 md:py-24 bg-[#faf9fd] border-b border-[#dedbea]/60">
+    <section id="sectores" className="py-16 md:py-24 bg-[#faf9fd] border-b border-[#dedbea]/60 scroll-mt-20">
+      <span id="audiencias" className="sr-only pointer-events-none" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl mx-auto text-center mb-12">
+        <div className="max-w-3xl mx-auto text-center mb-10 sm:mb-12">
           <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-[#1a1926] tracking-tight">
             Propuestas a la medida de cada sector institucional
           </h2>
           <p className="mt-4 text-base sm:text-lg text-[#464453] leading-relaxed">
             La prevención de la violencia laboral no admite recetas genéricas: cada sector opera bajo regulaciones, lógicas internas y marcos normativos específicos.
           </p>
+          <div className="mt-5 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#dedbea] text-[12px] sm:text-[12.5px] font-medium text-[#544f82] shadow-2xs">
+            <GlobeSimple size={15} weight="bold" className="text-[#5f4a9a] shrink-0" />
+            <span>Alcance para organizaciones en Argentina y países de habla hispana (Latinoamérica y España)</span>
+          </div>
         </div>
 
         {/* Tab Controls: Responsive Segmented Switcher (Sober architectural styling) */}

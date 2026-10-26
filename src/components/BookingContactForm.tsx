@@ -74,11 +74,15 @@ export function BookingContactForm() {
   );
 
   return (
-    <section id="contacto" className="py-16 md:py-24 bg-white border-b border-[#dedbea]/60">
+    <section id="contacto" className="py-16 md:py-24 bg-white border-b border-[#dedbea]/60 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center mb-14">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#f1eff7] text-[#544f82] text-[12px] font-semibold mb-4 border border-[#dedbea]/80">
+            <LockKey size={14} weight="bold" />
+            <span>Reunión inicial de 30´ sin costo · Confidencialidad estricta</span>
+          </div>
           <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-[#1a1926] tracking-tight">
             Coordinemos una reunión inicial
           </h2>
@@ -185,8 +189,8 @@ export function BookingContactForm() {
 
               {/* Confidentiality seal */}
               <div className="pt-4 border-t border-[#dedbea]/60 flex items-center gap-2 text-[12px] text-[#676479]">
-                <LockKey size={16} weight="bold" className="text-[#544f82]" />
-                <span>Protocolo de confidencialidad y secreto profesional.</span>
+                <LockKey size={16} weight="bold" className="text-[#544f82] shrink-0" />
+                <span>Reunión inicial de 30´ sin costo · Confidencialidad estricta</span>
               </div>
 
             </div>
@@ -310,12 +314,10 @@ export function BookingContactForm() {
                         onChange={handleChange}
                         className="w-full px-3.5 py-3 rounded-xl border border-[#dedbea] bg-[#faf9fd] text-[#1a1926] text-[16px] sm:text-[14px] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#5f4a9a] min-h-[46px]"
                       >
-                        <option value="sistema_integral">Sistema Integral de Prevención (4 fases)</option>
-                        <option value="diagnostico">Fase A: Diagnóstico y Hoja de Ruta</option>
-                        <option value="protocolo">Fase B: Diseño o Actualización de Protocolo</option>
-                        <option value="capacitacion">Fase C: Capacitación a Equipos y Mandos</option>
-                        <option value="asesoria">Fase D: Asesoramiento Continuo</option>
-                        <option value="urgencia">Consulta incidental sobre situación en curso</option>
+                        <option value="sistema_integral">Sistema Integral de Prevención</option>
+                        <option value="formaciones">Formaciones y Charlas de Sensibilización</option>
+                        <option value="diagnostico_protocolo">Diagnóstico y Protocolo Inicial</option>
+                        <option value="otra_consulta">Otra consulta institucional</option>
                       </select>
                     </div>
                   </div>
@@ -431,6 +433,10 @@ export function BookingContactForm() {
                         </>
                       )}
                     </button>
+                    <p className="text-[12px] text-[#676479] mt-3 flex items-center gap-1.5">
+                      <LockKey size={14} weight="bold" className="text-[#544f82] shrink-0" />
+                      <span>Reunión inicial de 30´ sin costo · Confidencialidad estricta</span>
+                    </p>
                   </div>
 
                 </form>

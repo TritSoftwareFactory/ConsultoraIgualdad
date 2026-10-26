@@ -1,16 +1,32 @@
 import Image from "next/image";
-import { EnvelopeSimple, Phone, InstagramLogo, MapPin, ShieldCheck } from "@phosphor-icons/react/dist/ssr";
+import Link from "next/link";
+import {
+  EnvelopeSimple,
+  Phone,
+  InstagramLogo,
+  MapPin,
+  ShieldCheck,
+  ArrowRight,
+} from "@phosphor-icons/react/dist/ssr";
+
+const FOOTER_SECTIONS = [
+  { label: "Metodología", href: "#metodologia" },
+  { label: "Sistema Integral", href: "#sistema" },
+  { label: "Sectores", href: "#sectores" },
+  { label: "Trayectoria", href: "#trayectoria" },
+  { label: "Formación", href: "#formacion" },
+];
 
 export function Footer() {
   return (
     <footer className="bg-[#1a1926] text-[#dedbea] pt-14 pb-12 border-t border-[#373359]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Main Content: Brand & Direct Contact Channels */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 pb-12 border-b border-white/10 items-start">
+        {/* Main Content: Brand, Navigation & Direct Contact Channels */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-12 border-b border-white/10 items-start">
           
           {/* Brand info */}
-          <div className="space-y-4">
+          <div className="space-y-4 lg:col-span-5">
             <div className="flex items-center gap-3">
               <div className="relative w-9 h-9 shrink-0 bg-white/10 p-1 rounded-full">
                 <Image
@@ -40,8 +56,37 @@ export function Footer() {
             </div>
           </div>
 
+          {/* Secciones Oficiales / Navegación */}
+          <div className="space-y-4 lg:col-span-3">
+            <div className="text-[12px] font-bold uppercase tracking-wider text-white">
+              Secciones
+            </div>
+            <ul className="space-y-2.5 text-[13.5px]">
+              {FOOTER_SECTIONS.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="text-[#dedbea]/80 hover:text-white transition-colors flex items-center gap-1.5"
+                  >
+                    <span className="text-[#b9b1d0] text-xs">›</span>
+                    <span>{item.label}</span>
+                  </Link>
+                </li>
+              ))}
+              <li className="pt-1">
+                <Link
+                  href="#contacto"
+                  className="text-white hover:text-[#b9b1d0] transition-colors font-medium inline-flex items-center gap-1.5"
+                >
+                  <span>Agendar reunión de 30´</span>
+                  <ArrowRight size={13} weight="bold" />
+                </Link>
+              </li>
+            </ul>
+          </div>
+
           {/* Direct Contact Channels */}
-          <div className="space-y-4 md:pl-6 lg:pl-12">
+          <div className="space-y-4 lg:col-span-4">
             <div className="text-[12px] font-bold uppercase tracking-wider text-white">
               Contacto y Canales Directos
             </div>

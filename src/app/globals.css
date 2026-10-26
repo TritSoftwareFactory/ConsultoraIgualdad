@@ -1,26 +1,38 @@
 @import "tailwindcss";
 
 @theme {
+  /* Brand Official Palette */
   --color-brand-primary: #5f4a9a;
+  --color-brand-iris: #948ece;
+  --color-brand-lavender: #948ece;
+  --color-brand-lila: #afabd8;
+  --color-brand-periwinkle: #afabd8;
+  --color-brand-neutral-base: #e8e8e8;
+  --color-brand-gray: #e8e8e8;
   --color-brand-deep: #544f82;
   --color-brand-dark: #373359;
-  --color-brand-lavender: #b9b1d0;
   --color-brand-soft: #f5f3f9;
   --color-brand-border: #dedbea;
   
+  /* Surfaces */
   --color-surface-base: #faf9fd;
   --color-surface-soft: #f3f1f8;
   --color-surface-card: #ffffff;
   --color-surface-border: #e4e1ed;
   --color-surface-border-subtle: #eeebf4;
 
+  /* Typography Colors */
   --color-text-title: #1a1926;
   --color-text-body: #3c3a4a;
   --color-text-muted: #676479;
   --color-text-soft: #8b889e;
 
-  --font-heading: var(--font-outfit), sans-serif;
-  --font-body: var(--font-plus-jakarta), sans-serif;
+  /* Typography Fonts */
+  --font-heading: var(--font-champagne), sans-serif;
+  --font-body: var(--font-futura), sans-serif;
+  --font-sans: var(--font-futura), sans-serif;
+  --font-champagne: var(--font-champagne), sans-serif;
+  --font-futura: var(--font-futura), sans-serif;
 }
 
 html {

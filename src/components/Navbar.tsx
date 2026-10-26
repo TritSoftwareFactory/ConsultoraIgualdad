@@ -6,13 +6,20 @@ import Link from "next/link";
 import { List, X, ArrowUpRight } from "@phosphor-icons/react";
 import { motion, AnimatePresence } from "motion/react";
 
-const NAV_LINKS = [
-  { href: "#metodologia", label: "Metodología" },
-  { href: "#ecosistema", label: "Sistema 4 Fases" },
-  { href: "#audiencias", label: "Sectores" },
-  { href: "#trayectoria", label: "Trayectoria" },
-  { href: "#inversion", label: "Inversión" },
+export interface NavItem {
+  label: string;
+  href: string;
+}
+
+export const NAV_ITEMS: NavItem[] = [
+  { label: "Metodología", href: "#metodologia" },
+  { label: "Sistema Integral", href: "#sistema" },
+  { label: "Sectores", href: "#sectores" },
+  { label: "Trayectoria", href: "#trayectoria" },
+  { label: "Formación", href: "#formacion" },
 ];
+
+export const NAV_LINKS = NAV_ITEMS;
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -100,7 +107,7 @@ export function Navbar() {
             className="inline-flex items-center gap-2 bg-[#544f82] hover:bg-[#433e68] text-white text-[13px] xl:text-[13.5px] font-medium px-4 xl:px-5 py-2.5 rounded-lg transition-all shadow-sm hover:shadow hover:-translate-y-[0.5px] active:translate-y-0 whitespace-nowrap shrink-0"
           >
             <span className="hidden xl:inline">Agendar reunión inicial</span>
-            <span className="xl:hidden">Agendar reunión</span>
+            <span className="xl:hidden">Reunión de 30´</span>
             <ArrowUpRight size={15} weight="bold" />
           </Link>
         </div>

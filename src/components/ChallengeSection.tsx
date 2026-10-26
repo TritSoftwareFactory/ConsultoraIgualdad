@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export function ChallengeSection() {
   return (
-    <section id="metodologia" className="py-16 md:py-24 bg-[#faf9fd] border-b border-[#dedbea]/60">
+    <section id="metodologia" className="py-16 md:py-24 bg-[#faf9fd] border-b border-[#dedbea]/60 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header: Centered vertical stack, no floater */}
@@ -12,7 +12,7 @@ export function ChallengeSection() {
             El desafío de las respuestas aisladas
           </h2>
           <p className="mt-4 text-base sm:text-lg text-[#464453] leading-relaxed">
-            Cuando las áreas interpretan los conflictos laborales de forma desconectada, los procedimientos se debilitan y la organización queda expuesta.
+            Cuando las áreas interpretan los conflictos laborales de forma desconectada, los procedimientos se debilitan, se revictimiza y la organización queda expuesta.
           </p>
         </div>
 
@@ -59,7 +59,16 @@ export function ChallengeSection() {
                     ×
                   </div>
                   <span className="text-[13.5px] sm:text-[14px] text-[#464453] leading-snug">
-                    <strong className="text-[#1a1926] font-semibold">Contingencia legal:</strong> Incumplimiento del Convenio 190 OIT y aumento de litigiosidad laboral.
+                    <strong className="text-[#1a1926] font-semibold">Revictimización:</strong> La persona en situación de violencia y acoso pasa por varias instancias y procedimientos en los que es expuesta innecesariamente por falta de criterios acordados previamente entre los sectores.
+                  </span>
+                </li>
+
+                <li className="flex items-start gap-3">
+                  <div className="w-5 h-5 rounded-md bg-[#f1eff7] text-[#676479] flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">
+                    ×
+                  </div>
+                  <span className="text-[13.5px] sm:text-[14px] text-[#464453] leading-snug">
+                    <strong className="text-[#1a1926] font-semibold">Contingencia legal:</strong> Incumplimiento del Convenio 190 OIT, de la Ley 26485 que prohíbe la revictimización en los casos de violencia de género en todos los ámbitos y modalidades, y aumento de litigiosidad laboral.
                   </span>
                 </li>
               </ul>

@@ -5,7 +5,7 @@ import { GraduationCap, BookOpen, Briefcase } from "@phosphor-icons/react";
 
 export function TrajectoryProfile() {
   return (
-    <section id="trayectoria" className="py-16 md:py-24 bg-white border-b border-[#dedbea]/60">
+    <section id="trayectoria" className="py-16 md:py-24 bg-white border-b border-[#dedbea]/60 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Eyebrow and Headline (Sober editorial layout) */}
@@ -17,10 +17,10 @@ export function TrajectoryProfile() {
             </span>
           </div>
           <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-[#1a1926] tracking-tight">
-            Belén Scalesa: Más de 20 años de articulación institucional
+            Belén Scalesa
           </h2>
           <p className="mt-3 text-base sm:text-lg text-[#464453] leading-relaxed">
-            Especialista en relaciones laborales, perspectiva de género y diseño de políticas públicas con trayectoria docente y técnica en el ámbito público y privado.
+            Politóloga especialista en género y violencias en el mundo del trabajo. Diseño e implementación de estrategias de prevención y abordaje, con una sólida trayectoria en formación y asistencia técnica tanto en el ámbito público como en el privado.
           </p>
         </div>
 
@@ -48,12 +48,12 @@ export function TrajectoryProfile() {
                 <div className="font-heading text-lg font-bold text-[#1a1926]">
                   Belén Scalesa
                 </div>
-                <div className="text-[13px] text-[#544f82] font-medium">
-                  Directora · Consultora de Género y Relaciones Laborales
+                <div className="text-[13px] text-[#544f82] font-medium mt-0.5">
+                  Directora · Consultora de Género en el Mundo del Trabajo
                 </div>
-                <div className="mt-2 text-[11.5px] text-[#676479] inline-flex items-center gap-1.5">
-                  <BookOpen size={14} weight="bold" />
-                  <span>Manual con ISBN: 978-987-86-6110-0</span>
+                <div className="mt-2.5 text-[11.5px] text-[#676479] inline-flex items-center justify-center gap-1.5 leading-snug">
+                  <BookOpen size={14} weight="bold" className="shrink-0 text-[#544f82]" />
+                  <span>Manual de contenidos sobre Trabajo, Empleo y Género(s) con ISBN.</span>
                 </div>
               </div>
 

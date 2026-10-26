@@ -1,19 +1,33 @@
 import type { Metadata, Viewport } from "next";
-import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-outfit",
+const champagne = localFont({
+  src: "./fonts/ChampagneLimousines.ttf",
+  variable: "--font-champagne",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
 });
 
-const plusJakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-plus-jakarta",
+const futura = localFont({
+  src: [
+    {
+      path: "./fonts/FuturaStdLight.otf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "./fonts/FuturaStdMedium.otf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/FuturaStdHeavy.otf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-futura",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -77,7 +91,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" className={`${outfit.variable} ${plusJakarta.variable}`}>
+    <html lang="es" className={`${champagne.variable} ${futura.variable}`}>
       <body className="min-h-screen bg-[#faf9fd] text-[#3c3a4a] font-sans antialiased selection:bg-[#dedbea] selection:text-[#544f82]">
         {children}
       </body>
