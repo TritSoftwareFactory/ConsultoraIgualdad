@@ -1,38 +1,29 @@
 import Image from "next/image";
-import Link from "next/link";
 import {
   EnvelopeSimple,
   Phone,
   InstagramLogo,
   MapPin,
   ShieldCheck,
-  ArrowRight,
 } from "@phosphor-icons/react/dist/ssr";
-
-const FOOTER_SECTIONS = [
-  { label: "Metodología", href: "#metodologia" },
-  { label: "Sistema Integral", href: "#sistema" },
-  { label: "Sectores", href: "#sectores" },
-  { label: "Trayectoria", href: "#trayectoria" },
-  { label: "Formación", href: "#formacion" },
-];
 
 export function Footer() {
   return (
     <footer className="bg-[#1a1926] text-[#dedbea] pt-14 pb-12 border-t border-[#373359]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Main Content: Brand, Navigation & Direct Contact Channels */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-12 border-b border-white/10 items-start">
+        {/* Main Content: Brand & Direct Contact Channels (Clean 2-Column Editorial Layout) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-16 pb-12 border-b border-white/10 items-start">
           
           {/* Brand info */}
-          <div className="space-y-4 lg:col-span-5">
+          <div className="space-y-4 lg:col-span-7">
             <div className="flex items-center gap-3">
               <div className="relative w-9 h-9 shrink-0 bg-white/10 p-1 rounded-full">
                 <Image
                   src="/images/logo-symbol.png"
                   alt="Isotipo Igualdad Consultora"
                   fill
+                  sizes="36px"
                   className="object-contain p-1"
                 />
               </div>
@@ -46,51 +37,22 @@ export function Footer() {
               </div>
             </div>
 
-            <p className="text-[13.5px] text-[#dedbea]/80 max-w-md leading-relaxed">
+            <p className="text-[14px] text-[#dedbea]/80 max-w-lg leading-relaxed">
               Consultoría técnica e institucional para empresas, asociaciones gremiales y organismos públicos. Prevención y abordaje integral de la violencia y el acoso en el trabajo bajo los estándares del Convenio 190 OIT.
             </p>
 
-            <div className="pt-1 text-[12px] text-[#b9b1d0] flex items-center gap-2">
+            <div className="pt-1 text-[12.5px] text-[#b9b1d0] flex items-center gap-2">
               <ShieldCheck size={16} weight="bold" />
               <span>Dirección técnica: Belén Scalesa (FLACSO · UNCo · UNRN)</span>
             </div>
           </div>
 
-          {/* Secciones Oficiales / Navegación */}
-          <div className="space-y-4 lg:col-span-3">
-            <div className="text-[12px] font-bold uppercase tracking-wider text-white">
-              Secciones
-            </div>
-            <ul className="space-y-2.5 text-[13.5px]">
-              {FOOTER_SECTIONS.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-[#dedbea]/80 hover:text-white transition-colors flex items-center gap-1.5"
-                  >
-                    <span className="text-[#b9b1d0] text-xs">›</span>
-                    <span>{item.label}</span>
-                  </Link>
-                </li>
-              ))}
-              <li className="pt-1">
-                <Link
-                  href="#contacto"
-                  className="text-white hover:text-[#b9b1d0] transition-colors font-medium inline-flex items-center gap-1.5"
-                >
-                  <span>Agendar reunión de 30´</span>
-                  <ArrowRight size={13} weight="bold" />
-                </Link>
-              </li>
-            </ul>
-          </div>
-
           {/* Direct Contact Channels */}
-          <div className="space-y-4 lg:col-span-4">
+          <div className="space-y-4 lg:col-span-5 md:pl-4 lg:pl-8">
             <div className="text-[12px] font-bold uppercase tracking-wider text-white">
               Contacto y Canales Directos
             </div>
-            <ul className="space-y-3 text-[13.5px] text-[#dedbea]/85">
+            <ul className="space-y-3.5 text-[13.5px] text-[#dedbea]/85">
               <li className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0 text-[#b9b1d0]">
                   <EnvelopeSimple size={16} weight="bold" />
@@ -157,6 +119,7 @@ export function Footer() {
                 src="/images/trit-icon.svg"
                 alt="Trit Software Factory"
                 fill
+                sizes="14px"
                 className="object-contain"
               />
             </div>
