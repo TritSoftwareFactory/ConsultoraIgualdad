@@ -14,6 +14,15 @@ export function Hero() {
     }
   }, []);
 
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      window.history.pushState(null, "", `#${id}`);
+    }
+  };
+
   return (
     <section className="relative min-h-[72vh] sm:min-h-[78vh] md:min-h-[82vh] flex items-center justify-center bg-[#faf9fd] overflow-hidden border-b border-[#dedbea]/60">
       
@@ -66,6 +75,7 @@ export function Hero() {
         <div className="mt-7 sm:mt-9 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 max-w-md sm:max-w-none mx-auto">
           <Link
             href="#contacto"
+            onClick={(e) => scrollToSection(e, "contacto")}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-[#544f82] active:bg-[#433e68] text-white text-[15px] sm:text-[15.5px] font-semibold px-8 py-3.5 sm:py-4 rounded-xl transition-all shadow-[0_4px_16px_rgba(84,79,130,0.22)] active:scale-[0.98] min-h-[48px]"
           >
             <span>Agendar reunión inicial</span>
@@ -73,7 +83,8 @@ export function Hero() {
           </Link>
 
           <Link
-            href="#metodologia"
+            href="#sistema"
+            onClick={(e) => scrollToSection(e, "sistema")}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/95 active:bg-[#f5f3f9] text-[#544f82] border border-[#dedbea] text-[15px] sm:text-[15.5px] font-semibold px-7 py-3.5 sm:py-4 rounded-xl transition-all backdrop-blur-xs shadow-xs active:scale-[0.98] min-h-[48px]"
           >
             <span>Conocer el sistema</span>
