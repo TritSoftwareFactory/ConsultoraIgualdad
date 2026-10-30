@@ -8,15 +8,16 @@ import { motion, AnimatePresence } from "motion/react";
 
 export interface NavItem {
   label: string;
+  fullLabel?: string;
   href: string;
 }
 
 export const NAV_ITEMS: NavItem[] = [
   { label: "Metodología", href: "#metodologia" },
-  { label: "Sistema Integral", href: "#sistema" },
+  { label: "Sistema Integral", fullLabel: "Sistema Integral de Prevención", href: "#sistema" },
   { label: "Sectores", href: "#sectores" },
   { label: "Trayectoria", href: "#trayectoria" },
-  { label: "Formación", href: "#formacion" },
+  { label: "Formación", fullLabel: "Formación y Sensibilización", href: "#formacion" },
 ];
 
 export const NAV_LINKS = NAV_ITEMS;
@@ -95,7 +96,14 @@ export function Navbar() {
               href={link.href}
               className="text-[13px] xl:text-[14px] font-medium text-[#464453] hover:text-[#544f82] transition-colors py-1 whitespace-nowrap relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-[2px] after:bg-[#5f4a9a] hover:after:w-full after:transition-all"
             >
-              {link.label}
+              {link.fullLabel ? (
+                <>
+                  <span className="hidden xl:inline">{link.fullLabel}</span>
+                  <span className="xl:hidden">{link.label}</span>
+                </>
+              ) : (
+                <span>{link.label}</span>
+              )}
             </Link>
           ))}
         </nav>
@@ -157,7 +165,7 @@ export function Navbar() {
                     onClick={() => setMobileMenuOpen(false)}
                     className="text-[16px] font-semibold text-[#1a1926] hover:text-[#544f82] active:text-[#544f82] py-3.5 flex items-center justify-between"
                   >
-                    <span>{link.label}</span>
+                    <span>{link.fullLabel || link.label}</span>
                     <span className="text-[#8b889e] text-xs">→</span>
                   </Link>
                 ))}
