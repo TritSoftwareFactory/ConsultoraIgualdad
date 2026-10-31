@@ -177,10 +177,10 @@ export function BookingContactForm() {
                       Sede y Alcance
                     </div>
                     <div className="text-[14.5px] font-bold text-[#1a1926] mt-0.5">
-                      Viedma, Río Negro
+                      Provincia de Buenos Aires y Río Negro
                     </div>
                     <div className="text-[12.5px] text-[#676479]">
-                      Intervenciones en toda la República Argentina
+                      Todo el país y países de habla hispana
                     </div>
                   </div>
                 </div>

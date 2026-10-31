@@ -27,8 +27,7 @@ export default function Home() {
     },
     "address": {
       "@type": "PostalAddress",
-      "addressLocality": "Viedma",
-      "addressRegion": "Río Negro",
+      "addressRegion": "Provincia de Buenos Aires y Río Negro",
       "addressCountry": "AR",
     },
     "telephone": "+5492920411152",

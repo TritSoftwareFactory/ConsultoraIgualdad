@@ -89,7 +89,7 @@ export function AudiencesSection() {
           </p>
           <div className="mt-5 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#dedbea] text-[12px] sm:text-[12.5px] font-medium text-[#544f82] shadow-2xs">
             <GlobeSimple size={15} weight="bold" className="text-[#5f4a9a] shrink-0" />
-            <span>Alcance para organizaciones en Argentina y países de habla hispana (Latinoamérica y España)</span>
+            <span>Alcance: Todo el país y países de habla hispana</span>
           </div>
         </div>
 

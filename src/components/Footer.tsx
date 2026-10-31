@@ -86,13 +86,14 @@ export function Footer() {
                   </a>
                 </div>
               </li>
-              <li className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0 text-[#b9b1d0]">
+              <li className="flex items-start gap-3">
+                <div className="w-8 h-8 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center shrink-0 text-[#b9b1d0] mt-0.5">
                   <MapPin size={16} weight="bold" />
                 </div>
                 <div>
-                  <span className="text-[11px] text-[#dedbea]/60 block leading-tight">Sede institucional</span>
-                  <span className="text-white/90 font-medium">Viedma, Río Negro, República Argentina</span>
+                  <span className="text-[11px] text-[#dedbea]/60 block leading-tight">Sede y Alcance</span>
+                  <span className="text-white/90 font-medium block">Provincia de Buenos Aires y Río Negro</span>
+                  <span className="text-[12px] text-[#dedbea]/70 block">Todo el país y países de habla hispana</span>
                 </div>
               </li>
             </ul>
