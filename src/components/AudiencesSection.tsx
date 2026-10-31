@@ -25,10 +25,10 @@ const AUDIENCES: Audience[] = [
     challenge:
       "Las contingencias laborales por acoso o discriminación acarrean altos costos en indemnizaciones, deterioro del clima de trabajo, desmotivación de equipos, ausentismo y daños severos a la reputación corporativa.",
     solution:
-      "Estructuramos canales formales de denuncia y protocolos blindados conforme al Convenio 190 de la OIT. Capacitamos a la línea gerencial y a Recursos Humanos para actuar con celeridad y seguridad técnica.",
+      "Estructuramos protocolos y circuitos de intervención claros conforme al Convenio 190 de la OIT. Capacitamos a la línea gerencial y a Recursos Humanos para actuar con celeridad y seguridad técnica.",
     highlights: [
       "Adecuación plena al estándar vinculante del Convenio 190 OIT",
-      "Definición de circuitos de investigación interna con debido proceso",
+      "Definición de circuitos de intervención con garantías de debido proceso",
       "Talleres de sensibilización y liderazgo para mandos medios y directores",
       "Resguardo legal de la empresa y mitigación de reclamos judiciales",
     ],

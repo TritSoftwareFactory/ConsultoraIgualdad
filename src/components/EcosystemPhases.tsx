@@ -41,9 +41,9 @@ const PHASES: PhaseItem[] = [
     stepLabel: "Fase 01 de 04",
     shortTitle: "Diagnóstico",
     title: "Diagnóstico y hoja de ruta",
-    subtitle: "El punto de partida técnico",
+    subtitle: "El punto de partida",
     description:
-      "Revisión integral del estado actual de la organización: auditoría de protocolos preexistentes, normativa interna y procedimientos de RR. HH. Mapeo de fortalezas, vacíos normativos y formulación de una hoja de ruta priorizada.",
+      "Revisión del estado actual de la organización: protocolos, normativa interna y procedimientos. El objetivo es identificar fortalezas y oportunidades de mejora para trazar una hoja de ruta clara y priorizada.",
     deliverables: [
       "Auditoría documental y de procedimientos",
       "Matriz de hallazgos y priorización de riesgos",
@@ -59,9 +59,9 @@ const PHASES: PhaseItem[] = [
     stepLabel: "Fase 02 de 04",
     shortTitle: "Protocolos",
     title: "Diseño y actualización de protocolos",
-    subtitle: "La herramienta central de actuación",
+    subtitle: "La herramienta central",
     description:
-      "Elaboración o adecuación del protocolo de prevención e intervención adaptado a la dimensión institucional. Definición taxativa de circuitos de denuncia, plazos, garantías de debido proceso, medidas cautelares y manual de aplicación.",
+      "A partir del diagnóstico, elaboro o reviso el protocolo de actuación según cada caso. Diseño circuitos de intervención claros, se definen responsabilidades y se adapta cada paso a la realidad y al marco normativo de tu organización.",
     deliverables: [
       "Protocolo institucional conforme Convenio 190 OIT",
       "Manual operativo y flujogramas de intervención",
@@ -77,9 +77,9 @@ const PHASES: PhaseItem[] = [
     stepLabel: "Fase 03 de 04",
     shortTitle: "Capacitación",
     title: "Capacitación para la implementación",
-    subtitle: "El factor humano operativo",
+    subtitle: "El factor humano",
     description:
-      "Talleres prácticos diferenciados por rol funcional: alta dirección, mandos medios, equipos de Recursos Humanos y comisiones de delegados gremiales. Entrenamiento en detección temprana, recepción de consultas y límites de intervención.",
+      "Un protocolo cobra vida cuando los equipos saben cómo aplicarlo. Diseño y facilito talleres adaptados a los distintos roles (mandos medios, RR. HH., referentes sindicales), trabajando sobre responsabilidades institucionales y circuitos de actuación.",
     deliverables: [
       "Talleres para mandos medios y conducción",
       "Capacitación a equipos de gestión y RR. HH.",
@@ -95,9 +95,9 @@ const PHASES: PhaseItem[] = [
     stepLabel: "Fase 04 de 04",
     shortTitle: "Asesoramiento",
     title: "Asesoramiento técnico continuo",
-    subtitle: "Acompañamiento y sostenibilidad",
+    subtitle: "El acompañamiento",
     description:
-      "Asistencia técnica permanente para la resolución de situaciones complejas, adecuación normativa ante reformas legislativas y consolidación paulatina de una cultura laboral basada en el respeto recíproco y la igualdad.",
+      "La prevención es un proceso dinámico. Brindo asistencia técnica para el desarrollo de políticas, procedimientos y documentos vinculados con igualdad, género y empleo, acompañando la consolidación de la cultura organizacional a lo largo del tiempo.",
     deliverables: [
       "Consultoría técnica ante casos incidentales",
       "Supervisión periódica de circuitos aplicados",
@@ -228,9 +228,7 @@ export function EcosystemPhases() {
             Ecosistema de cuatro fases interconectadas
           </h2>
           <p className="mt-4 text-base sm:text-lg text-[#464453] leading-relaxed text-balance">
-            Un protocolo sin capacitación queda en el papel; una capacitación sin
-            diagnóstico carece de precisión; y un diagnóstico sin seguimiento
-            pierde vigencia. La integralidad garantiza sostenibilidad técnica.
+            Un protocolo sin capacitación puede quedar en el papel sin incidencia; una capacitación sin un diagnóstico previo puede no responder a las necesidades reales; y un diagnóstico sin acompañamiento puede perder vigencia. La integralidad asegura que cada herramienta potencie a la otra, reduciendo riesgos y consolidando una cultura de igualdad y respeto.
           </p>
         </motion.div>
 

@@ -32,7 +32,7 @@ export function ChallengeSection() {
               </h3>
 
               <p className="text-[14.5px] sm:text-[15px] text-[#464453] leading-relaxed mb-6">
-                En muchas instituciones, mandos directivos, Recursos Humanos y delegados sindicales activan respuestas dispares frente a denuncias o situaciones de acoso:
+                En muchas organizaciones, mandos medios y directivos, Recursos Humanos y representación sindical pueden activar respuestas diferentes frente a situaciones de violencia y acoso:
               </p>
 
               <ul className="space-y-3.5 sm:space-y-4">
@@ -50,7 +50,7 @@ export function ChallengeSection() {
                     ×
                   </div>
                   <span className="text-[13.5px] sm:text-[14px] text-[#464453] leading-snug">
-                    <strong className="text-[#1a1926] font-semibold">Circuitos difusos:</strong> Se desconoce quién recibe la denuncia, cómo se documenta y quién resuelve.
+                    <strong className="text-[#1a1926] font-semibold">Circuitos difusos:</strong> Procedimientos poco claros sobre la recepción, el registro y la intervención frente a cada situación.
                   </span>
                 </li>
 
