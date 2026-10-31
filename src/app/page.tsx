@@ -6,6 +6,7 @@ import { EcosystemPhases } from "@/components/EcosystemPhases";
 import { AudiencesSection } from "@/components/AudiencesSection";
 import { TrajectoryProfile } from "@/components/TrajectoryProfile";
 import { PricingSection } from "@/components/PricingSection";
+import { TrainingDividerBanner } from "@/components/TrainingDividerBanner";
 import { TrainingSection } from "@/components/TrainingSection";
 import { BookingContactForm } from "@/components/BookingContactForm";
 import { Footer } from "@/components/Footer";
@@ -51,6 +52,7 @@ export default function Home() {
         <AudiencesSection />
         <TrajectoryProfile />
         <PricingSection />
+        <TrainingDividerBanner />
         <TrainingSection />
         <BookingContactForm />
       </main>
